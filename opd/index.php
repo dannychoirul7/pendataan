@@ -1,7 +1,7 @@
 <?php
 require '../header.php';
 require "fungsi.php";
-$merek_barang = query("SELECT * FROM merek_barang ORDER BY id_merek_barang Asc");
+$opd = query("SELECT * FROM opd ORDER BY id_opd Asc");
 ?>
 
 <body>
@@ -14,25 +14,25 @@ $merek_barang = query("SELECT * FROM merek_barang ORDER BY id_merek_barang Asc")
     </button>
     <div class="card mt-5">
       <div class="card-body">
-        <h1 style="text-align:center">Merek Barang </h1>
+        <h1 style="text-align:center">OPD(Organisasi Perangkat Daerah) </h1>
         <table class="table table-striped">
           <thead>
             <tr style="text-align:center">
               <th style="width: 15%">No</th>
-              <th>Merek Barang</th>
+              <th>OPD(Organisasi Perangkat Daerah)</th>
               <th style="width: 15%">
                 <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
               </th>
             </tr>
           <tbody>
             <?php $no = 1; ?>
-            <?php foreach ($merek_barang as $row) : ?>
+            <?php foreach ($opd as $row) : ?>
               <tr>
                 <td width="5%" style="text-align: center;" scope="row"><?= $no; ?></td>
-                <td style="text-align: center;"><?= $row["nama_merek_barang"]; ?></td>
+                <td style="text-align: center;"><?= $row["nama_opd"]; ?></td>
                 <td style="text-align: center">
-                  <a class="btn btn-sm btn-warning" href="ubah.php?id_merek_barang=<?= $row["id_merek_barang"]; ?>" role="button">ubah</a>
-                  <a class="btn btn-sm btn-danger" href="hapus.php?id_merek_barang=<?= $row["id_merek_barang"]; ?>" onclick="return confirm('yakin?');" role="button">hapus</a>
+                  <a class="btn btn-sm btn-warning" href="ubah.php?id_opd=<?= $row["id_opd"]; ?>" role="button">ubah</a>
+                  <a class="btn btn-sm btn-danger" href="hapus.php?id_opd=<?= $row["id_opd"]; ?>" onclick="return confirm('yakin?');" role="button">hapus</a>
                 </td>
               </tr>
             <?php $no++;

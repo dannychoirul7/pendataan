@@ -49,8 +49,8 @@
       </a>
     </li>
     <li>
-      <a class="text-white" href="#">
-        Sports
+      <a class="text-white" href="../opd/index.php">
+        OPD(Organisasi Perangkat Daerah)
       </a>
     </li>
     <li>
