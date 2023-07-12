@@ -31,8 +31,8 @@ $jenis_barang = query("SELECT * FROM jenis_barang ORDER BY id_jenis_barang Asc")
                 <td width="5%" style="text-align: center;" scope="row"><?= $no; ?></td>
                 <td style="text-align: center;"><?= $row["nama_jenis_barang"]; ?></td>
                 <td style="text-align: center">
-                  <a class="btn btn-sm btn-warning" href="#" role="button">ubah</a>
-                  <a class="btn btn-sm btn-danger" href="#" onclick="return confirm('yakin?');" role="button">hapus</a>
+                  <a class="btn btn-sm btn-warning" href="ubah.php?id_jenis_barang=<?= $row["id_jenis_barang"]; ?>" role="button">ubah</a>
+                  <a class="btn btn-sm btn-danger" href="hapus.php?id_jenis_barang=<?= $row["id_jenis_barang"]; ?>" onclick="return confirm('yakin?');" role="button">hapus</a>
                 </td>
               </tr>
             <?php $no++;
@@ -46,4 +46,3 @@ $jenis_barang = query("SELECT * FROM jenis_barang ORDER BY id_jenis_barang Asc")
 </body>
 <?php require '../footer.php'; ?>
 
-</html>
