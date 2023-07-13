@@ -15,12 +15,12 @@ $jenis_barang = query("SELECT * FROM jenis_barang ORDER BY id_jenis_barang Asc")
     <div class="card mt-5">
       <div class="card-body">
         <h1 style="text-align:center">Jenis Barang </h1>
-        <table class="table table-striped">
+        <table class="table table-striped" id="datatable">
           <thead>
             <tr style="text-align:center">
-              <th style="width: 15%">No</th>
-              <th>Jenis Barang</th>
-              <th style="width: 15%">
+              <th width="5%" style="text-align:center">Nomor</th>
+              <th style="text-align:center">Jenis Barang</th>
+              <th width="15%" style="text-align:center">
                 <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
               </th>
             </tr>
@@ -45,4 +45,3 @@ $jenis_barang = query("SELECT * FROM jenis_barang ORDER BY id_jenis_barang Asc")
   </div>
 </body>
 <?php require '../footer.php'; ?>
-

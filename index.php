@@ -13,7 +13,7 @@
     <div>
       <nav class="navbar navbar-dark bg-primary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar text</a>
+          <a class="navbar-brand" href="index.php">Manajemen Aset</a>
         </div>
       </nav>
     </div>
@@ -54,7 +54,6 @@
 
     <div>
       <div class="sidebar p-4 bg-primary" id="sidebar">
-        <h4 class="mb-5 text-white">Manajemen Aset</h4>
         <li>
           <a class="text-white" href="perangkat/index.php">
             Perangkat

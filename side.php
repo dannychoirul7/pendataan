@@ -32,7 +32,6 @@
 
 <div>
   <div class="sidebar p-4 bg-primary" id="sidebar">
-    <h4 class="mb-5 text-white">Manajemen Aset</h4>
     <li>
       <a class="text-white" href="../perangkat/index.php">
         Perangkat

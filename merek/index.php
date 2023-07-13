@@ -14,13 +14,13 @@ $merek_barang = query("SELECT * FROM merek_barang ORDER BY id_merek_barang Asc")
     </button>
     <div class="card mt-5">
       <div class="card-body">
-        <h1 style="text-align:center">Merek Barang </h1>
-        <table class="table table-striped">
+        <h1 style="text-align:center">Merek Barang</h1>
+        <table class="table table-striped" id="datatable">
           <thead>
             <tr style="text-align:center">
-              <th style="width: 15%">No</th>
-              <th>Merek Barang</th>
-              <th style="width: 15%">
+              <th width="5%" style="text-align:center">No</th>
+              <th style="text-align:center">Merek Barang</th>
+              <th width="15%" style="text-align:center">
                 <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
               </th>
             </tr>
