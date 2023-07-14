@@ -14,7 +14,7 @@ $opd = query("SELECT * FROM opd ORDER BY id_opd Asc");
     </button>
     <div class="card mt-5">
       <div class="card-body">
-        <h1 style="text-align:center">OPD(Organisasi Perangkat Daerah) </h1>
+        <h1 style="text-align:center">DATA PERANGKAT</h1>
         <table class="table table-striped" id="datatable">
           <thead>
             <tr style="text-align:center">

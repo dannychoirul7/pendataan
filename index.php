@@ -55,8 +55,8 @@
     <div>
       <div class="sidebar p-4 bg-primary" id="sidebar">
         <li>
-          <a class="text-white" href="perangkat/index.php">
-            Perangkat
+          <a class="text-white" href="barang/index.php">
+            Barang
           </a>
         </li>
         <li>
