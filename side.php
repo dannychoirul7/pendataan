@@ -53,7 +53,7 @@
       </a>
     </li>
     <li>
-      <a class="text-white" href="#">
+      <a class="text-white" href="../gambar/index.php">
         Music
       </a>
     </li>

@@ -1,7 +1,7 @@
 <?php
 require '../header.php';
 require "fungsi.php";
-$opd = query("SELECT * FROM opd ORDER BY id_opd Asc");
+$barang = query("SELECT * FROM barang");
 ?>
 
 <body>
@@ -14,27 +14,36 @@ $opd = query("SELECT * FROM opd ORDER BY id_opd Asc");
     </button>
     <div class="card mt-5">
       <div class="card-body">
-        <h1 style="text-align:center">DATA PERANGKAT</h1>
+        <h1 style="text-align:center">DATA BARANG</h1>
         <table class="table table-striped" id="datatable">
           <thead>
             <tr style="text-align:center">
               <th style="text-align:center" style="width: 15%">No</th>
-              <th width="25%" style="text-align:center">Nama OPD</th>
-              <th style="text-align:center">Alamat</th>
+              <th style="text-align:center">Merek Barang</th>
+              <th style="text-align:center">Jenis Barang</th>
+              <th style="text-align:center">nomor_serial_barang</th>
+              <th style="text-align:center">opd</th>
+              <th style="text-align:center">status_barang</th>
+              <th style="text-align:center">nama_user</th>
               <th width="15%" style="text-align:center">
                 <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
               </th>
             </tr>
           <tbody>
             <?php $no = 1; ?>
-            <?php foreach ($opd as $row) : ?>
+            <?php foreach ($barang as $row) : ?>
               <tr>
                 <td width="5%" style="text-align: center;" scope="row"><?= $no; ?></td>
-                <td style="text-align: center;"><?= $row["nama_opd"]; ?></td>
-                <td style="text-align: center;"><?= $row["alamat_opd"]; ?></td>
+                <td style="text-align: center;"><?= $row["merek_barang"]; ?></td>
+                <td style="text-align: center;"><?= $row["jenis_barang"]; ?></td>
+                <td style="text-align: center;"><?= $row["nomor_serial_barang"]; ?></td>
+                <td style="text-align: center;"><?= $row["opd"]; ?></td>
+                <td style="text-align: center;"><?= $row["status_barang"]; ?></td>
+                <td style="text-align: center;"><?= $row["nama_user"]; ?></td>
                 <td style="text-align: center">
-                  <a class="btn btn-sm btn-warning" href="ubah.php?id_opd=<?= $row["id_opd"]; ?>" role="button">ubah</a>
-                  <a class="btn btn-sm btn-danger" href="hapus.php?id_opd=<?= $row["id_opd"]; ?>" onclick="return confirm('yakin?');" role="button">hapus</a>
+                  <a class="btn btn-sm btn-dark" href="#" role="button">Detail</a>
+                  <a class="btn btn-sm btn-warning" href="#" role="button">Ubah</a>
+                  <a class="btn btn-sm btn-danger" href="#" onclick="return confirm('yakin?');" role="button">Hapus</a>
                 </td>
               </tr>
             <?php $no++;
