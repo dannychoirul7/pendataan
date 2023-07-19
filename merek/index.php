@@ -24,6 +24,7 @@ $merek_barang = query("SELECT * FROM merek_barang ORDER BY id_merek_barang Asc")
                 <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
               </th>
             </tr>
+          </thead>
           <tbody>
             <?php $no = 1; ?>
             <?php foreach ($merek_barang as $row) : ?>
@@ -38,7 +39,6 @@ $merek_barang = query("SELECT * FROM merek_barang ORDER BY id_merek_barang Asc")
             <?php $no++;
             endforeach; ?>
           </tbody>
-          </thead>
         </table>
       </div>
     </div>

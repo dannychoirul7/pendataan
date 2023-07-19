@@ -11,7 +11,7 @@
  Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 03/07/2023 06:21:17
+ Date: 19/07/2023 15:22:27
 */
 
 SET NAMES utf8mb4;
@@ -23,51 +23,57 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `barang`;
 CREATE TABLE `barang`  (
   `id_barang` int NOT NULL AUTO_INCREMENT,
-  `nomor_serial_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `join_merek_barang` int NOT NULL,
+  `join_jenis_barang` int NOT NULL,
+  `nomor_serial_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `status_barang` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `join_opd` int NOT NULL,
   `koordinat_barang` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `detail_lokasi_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `keterangan_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tanggal_masuk` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE CURRENT_TIMESTAMP(6),
-  `nama_user` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `jenis_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `merek_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `gambar` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `opd` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `update` datetime NULL DEFAULT NULL,
+  `tanggal_update` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE CURRENT_TIMESTAMP(6),
+  `keterangan_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `join_user` int NOT NULL,
+  `join_update` int NULL DEFAULT NULL,
   PRIMARY KEY (`id_barang`) USING BTREE,
-  INDEX `nama`(`nama_user`) USING BTREE,
-  INDEX `jenis_barang`(`jenis_barang`) USING BTREE,
-  INDEX `merek_barang`(`merek_barang`) USING BTREE,
-  INDEX `opd`(`opd`) USING BTREE,
-  INDEX `update`(`update`) USING BTREE,
-  INDEX `gambar`(`gambar`) USING BTREE,
-  CONSTRAINT `gambar` FOREIGN KEY (`gambar`) REFERENCES `gambar` (`nama_gambar`) ON DELETE SET NULL ON UPDATE SET NULL,
-  CONSTRAINT `jenis_barang` FOREIGN KEY (`jenis_barang`) REFERENCES `jenis_barang` (`nama_jenis_barang`) ON DELETE SET NULL ON UPDATE SET NULL,
-  CONSTRAINT `merek_barang` FOREIGN KEY (`merek_barang`) REFERENCES `merek_barang` (`nama_merek_barang`) ON DELETE SET NULL ON UPDATE SET NULL,
-  CONSTRAINT `nama` FOREIGN KEY (`nama_user`) REFERENCES `user` (`nama_user`) ON DELETE SET NULL ON UPDATE SET NULL,
-  CONSTRAINT `opd` FOREIGN KEY (`opd`) REFERENCES `opd` (`nama_opd`) ON DELETE SET NULL ON UPDATE SET NULL,
-  CONSTRAINT `update` FOREIGN KEY (`update`) REFERENCES `update` (`tanggal_update`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+  INDEX `nama`(`join_user`) USING BTREE,
+  INDEX `jenis_barang`(`join_jenis_barang`) USING BTREE,
+  INDEX `merek_barang`(`join_merek_barang`) USING BTREE,
+  INDEX `opd`(`join_opd`) USING BTREE,
+  INDEX `update`(`join_update`) USING BTREE,
+  CONSTRAINT `jenis_barang` FOREIGN KEY (`join_jenis_barang`) REFERENCES `jenis_barang` (`id_jenis_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `merek_barang` FOREIGN KEY (`join_merek_barang`) REFERENCES `merek_barang` (`id_merek_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `opd` FOREIGN KEY (`join_opd`) REFERENCES `opd` (`id_opd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `update` FOREIGN KEY (`join_update`) REFERENCES `update` (`id_update`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `user` FOREIGN KEY (`join_user`) REFERENCES `user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of barang
 -- ----------------------------
+INSERT INTO `barang` VALUES (6, 1, 1, '1234567890', 'baik', 7, '-0987654,345678', 'ruangan', '2023-07-18 22:56:01.866063', '2023-07-18 22:56:01.866063', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque animi maxime at minima. Totam vero omnis ducimus commodi placeat accusamus, repudiandae nemo, harum magni aperiam esse voluptates. Non, sapiente vero?', 1, NULL);
+INSERT INTO `barang` VALUES (9, 1, 5, '0987654321', 'rusak', 6, '-788769,674765', 'lapangan', '2023-07-19 14:35:18.943978', '2023-07-19 14:35:18.943978', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque animi maxime at minima. Totam vero omnis ducimus commodi placeat accusamus, repudiandae nemo, harum magni aperiam esse voluptates. Non, sapiente vero?', 1, NULL);
 
 -- ----------------------------
 -- Table structure for gambar
 -- ----------------------------
 DROP TABLE IF EXISTS `gambar`;
 CREATE TABLE `gambar`  (
-  `id_gambar` int NOT NULL,
+  `id_gambar` int NOT NULL AUTO_INCREMENT,
   `nama_gambar` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `join_barang` int NOT NULL,
   PRIMARY KEY (`id_gambar`) USING BTREE,
-  INDEX `nama_gambar`(`nama_gambar`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+  INDEX `nama_gambar`(`nama_gambar`) USING BTREE,
+  INDEX `barang`(`join_barang`) USING BTREE,
+  CONSTRAINT `barang` FOREIGN KEY (`join_barang`) REFERENCES `barang` (`id_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gambar
 -- ----------------------------
+INSERT INTO `gambar` VALUES (12, 'database.png', 9);
+INSERT INTO `gambar` VALUES (16, 'login.png', 6);
+INSERT INTO `gambar` VALUES (17, 'pdm.png', 6);
 
 -- ----------------------------
 -- Table structure for jenis_barang
@@ -78,11 +84,22 @@ CREATE TABLE `jenis_barang`  (
   `nama_jenis_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_jenis_barang`) USING BTREE,
   INDEX `nama_jenis_barang`(`nama_jenis_barang`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of jenis_barang
 -- ----------------------------
+INSERT INTO `jenis_barang` VALUES (9, 'delapan');
+INSERT INTO `jenis_barang` VALUES (2, 'dua');
+INSERT INTO `jenis_barang` VALUES (5, 'empat');
+INSERT INTO `jenis_barang` VALUES (7, 'enam');
+INSERT INTO `jenis_barang` VALUES (6, 'lima');
+INSERT INTO `jenis_barang` VALUES (1, 'satu');
+INSERT INTO `jenis_barang` VALUES (12, 'sebelas');
+INSERT INTO `jenis_barang` VALUES (10, 'sembilan');
+INSERT INTO `jenis_barang` VALUES (11, 'sepuluh');
+INSERT INTO `jenis_barang` VALUES (3, 'tiga');
+INSERT INTO `jenis_barang` VALUES (8, 'tujuh');
 
 -- ----------------------------
 -- Table structure for merek_barang
@@ -93,11 +110,12 @@ CREATE TABLE `merek_barang`  (
   `nama_merek_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_merek_barang`) USING BTREE,
   INDEX `nama_merek_barang`(`nama_merek_barang`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of merek_barang
 -- ----------------------------
+INSERT INTO `merek_barang` VALUES (1, 'merek1');
 
 -- ----------------------------
 -- Table structure for opd
@@ -106,13 +124,19 @@ DROP TABLE IF EXISTS `opd`;
 CREATE TABLE `opd`  (
   `id_opd` int NOT NULL AUTO_INCREMENT,
   `nama_opd` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `alamat_opd` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_opd`) USING BTREE,
-  INDEX `nama_opd`(`nama_opd`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+  INDEX `nama_opd`(`nama_opd`) USING BTREE,
+  INDEX `nama_opd_2`(`nama_opd`, `id_opd`, `alamat_opd`) USING BTREE,
+  INDEX `nama_opd_3`(`nama_opd`, `id_opd`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of opd
 -- ----------------------------
+INSERT INTO `opd` VALUES (6, 'mjkt', 'mojokerto');
+INSERT INTO `opd` VALUES (5, 'sby', 'surabaya');
+INSERT INTO `opd` VALUES (7, 'sby', 'adoh');
 
 -- ----------------------------
 -- Table structure for update
@@ -141,10 +165,11 @@ CREATE TABLE `user`  (
   `level` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_user`) USING BTREE,
   INDEX `nama_user`(`nama_user`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES (1, 'user', 'user', 'biasa', '1');
 
 SET FOREIGN_KEY_CHECKS = 1;

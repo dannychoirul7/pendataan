@@ -20,17 +20,59 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
-<h1 style="text-align: center;">Tambah Data OPD(Organisasi Perangkat Daerah)</h1>
+<h1 style="text-align: center;">Tambah Data Barang</h1>
 
 <form action="" method="post">
     <div class="form-group col-md-4 offset-4 mb-4">
-        <label for="nama_opd">Nama OPD</label>
-        <input type="text" class="form-control" id="nama_opd" name="nama_opd" required>
+        <label for="join_merek_barang">Merek Barang</label>
+        <input type="text" class="form-control" id="join_merek_barang" name="join_merek_barang" required>
     </div>
+
     <div class="form-group col-md-4 offset-4 mb-4">
-        <label for="alamat_opd">Alamat OPD</label>
-        <input type="text" class="form-control" id="alamat_opd" name="alamat_opd" required>
+        <label for="join_jenis_barang">Jenis Barang</label>
+        <input type="text" class="form-control" id="join_jenis_barang" name="join_jenis_barang" required>
     </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="nomor_serial_barang">Nomor Serial Barang</label>
+        <input type="text" class="form-control" id="nomor_serial_barang" name="nomor_serial_barang" required>
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="status_barang">Status Barang</label>
+        <input type="text" class="form-control" id="status_barang" name="status_barang" required>
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="join_opd">Nama OPD</label>
+        <input type="text" class="form-control" id="join_opd" name="join_opd" required>
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="detail_lokasi_barang">Detail Penempatan Barang</label>
+        <input type="text" class="form-control" id="detail_lokasi_barang" name="detail_lokasi_barang" required>
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="koordinat_barang">Koordinat Barang</label>
+        <input type="text" class="form-control" id="koordinat_barang" name="koordinat_barang" required>
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="keterangan_barang">Keterangan Barang</label>
+        <input type="text" class="form-control" id="keterangan_barang" name="keterangan_barang" required>
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="join_user">Nama User</label>
+        <input type="text" class="form-control" id="join_user" name="join_user" required>
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="join_gambar">Gambar Pedukung</label>
+        <input type="text" class="form-control" id="join_gambar" name="join_gambar" required>
+    </div>
+
     <div class="offset-4 mb-4">
         <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
         <a class="btn btn-danger" href="index.php" role="button">Batal</a>

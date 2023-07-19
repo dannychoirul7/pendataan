@@ -24,6 +24,7 @@ $jenis_barang = query("SELECT * FROM jenis_barang ORDER BY id_jenis_barang Asc")
                 <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
               </th>
             </tr>
+          </thead>
           <tbody>
             <?php $no = 1; ?>
             <?php foreach ($jenis_barang as $row) : ?>
@@ -38,7 +39,6 @@ $jenis_barang = query("SELECT * FROM jenis_barang ORDER BY id_jenis_barang Asc")
             <?php $no++;
             endforeach; ?>
           </tbody>
-          </thead>
         </table>
       </div>
     </div>
