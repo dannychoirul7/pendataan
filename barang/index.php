@@ -1,7 +1,12 @@
 <?php
 require '../header.php';
 require "fungsi.php";
-$barang = query("SELECT * FROM barang");
+$barang = query("SELECT * FROM barang 
+JOIN merek_barang ON join_merek_barang = id_merek_barang 
+JOIN jenis_barang ON join_jenis_barang = id_jenis_barang 
+JOIN opd ON join_opd = id_opd 
+JOIN user ON join_user = id_user
+");
 ?>
 
 <body>
@@ -18,38 +23,40 @@ $barang = query("SELECT * FROM barang");
         <table class="table table-striped" id="datatable">
           <thead>
             <tr style="text-align:center">
-              <th style="text-align:center" style="width: 15%">No</th>
+              <th width="15%" style="text-align:center">No</th>
               <th style="text-align:center">Merek Barang</th>
               <th style="text-align:center">Jenis Barang</th>
-              <th style="text-align:center">nomor_serial_barang</th>
-              <th style="text-align:center">opd</th>
+              <th style="text-align:center">Nomor serial barang</th>
+              <th style="text-align:center">Nama Opd</th>
+              <th style="text-align:center">Alamat Opd</th>
               <th style="text-align:center">status_barang</th>
               <th style="text-align:center">nama_user</th>
               <th width="15%" style="text-align:center">
                 <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
               </th>
             </tr>
+          </thead>
           <tbody>
             <?php $no = 1; ?>
             <?php foreach ($barang as $row) : ?>
               <tr>
                 <td width="5%" style="text-align: center;" scope="row"><?= $no; ?></td>
-                <td style="text-align: center;"><?= $row["merek_barang"]; ?></td>
-                <td style="text-align: center;"><?= $row["jenis_barang"]; ?></td>
+                <td style="text-align: center;"><?= $row["nama_merek_barang"]; ?></td>
+                <td style="text-align: center;"><?= $row["nama_jenis_barang"]; ?></td>
                 <td style="text-align: center;"><?= $row["nomor_serial_barang"]; ?></td>
-                <td style="text-align: center;"><?= $row["opd"]; ?></td>
+                <td style="text-align: center;"><?= $row["nama_opd"]; ?></td>
+                <td style="text-align: center;"><?= $row["alamat_opd"]; ?></td>
                 <td style="text-align: center;"><?= $row["status_barang"]; ?></td>
                 <td style="text-align: center;"><?= $row["nama_user"]; ?></td>
                 <td style="text-align: center">
-                  <a class="btn btn-sm btn-dark" href="#" role="button">Detail</a>
-                  <a class="btn btn-sm btn-warning" href="#" role="button">Ubah</a>
-                  <a class="btn btn-sm btn-danger" href="#" onclick="return confirm('yakin?');" role="button">Hapus</a>
+                  <a class="btn btn-sm btn-dark" href="detail.php?id_barang=<?= $row["id_barang"]; ?>" role="button">Detail</a>
+                  <a class="btn btn-sm btn-warning" href="ubah.php?id_barang=<?= $row["id_barang"]; ?>" role="button">Ubah</a>
+                  <a class="btn btn-sm btn-danger" href="hapus.php?id_barang=<?= $row["id_barang"]; ?>" onclick="return confirm('yakin?');" role="button">Hapus</a>
                 </td>
               </tr>
             <?php $no++;
             endforeach; ?>
           </tbody>
-          </thead>
         </table>
       </div>
     </div>
