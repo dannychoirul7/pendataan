@@ -22,10 +22,25 @@ if (isset($_POST["submit"])) {
 
 <h1 style="text-align: center;">Tambah Data Barang</h1>
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
+
     <div class="form-group col-md-4 offset-4 mb-4">
-        <label for="join_merek_barang">Merek Barang</label>
-        <input type="text" class="form-control" id="join_merek_barang" name="join_merek_barang" required>
+        <label>Merek Barang</label>
+        <div class="input-group">
+            <select class="form-select" name="join_merek_barang" id="join_merek_barang" required>
+                <option value=""></option>
+                <?php
+
+                $query = mysqli_query($db, "SELECT * FROM merek_barang");
+                if ($query == false) {
+                    die("Terdapat Kesalahan : " . mysqli_error($conn));
+                }
+                while ($query2 = mysqli_fetch_assoc($query)) {
+                    echo "<option value='$query2[id_merek_barang]'>$query2[nama_merek_barang]</option>";
+                }
+                ?>
+            </select>
+        </div>
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">
@@ -40,7 +55,11 @@ if (isset($_POST["submit"])) {
 
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="status_barang">Status Barang</label>
-        <input type="text" class="form-control" id="status_barang" name="status_barang" required>
+        <select class="form-select" id="status_barang" name="status_barang" required>
+            <option value=""></option>
+            <option value="Normal">Normal</option>
+            <option value="Rusak">Rusak</option>
+        </select>
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">

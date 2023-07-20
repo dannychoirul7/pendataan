@@ -11,7 +11,7 @@
  Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 19/07/2023 15:22:27
+ Date: 20/07/2023 20:12:03
 */
 
 SET NAMES utf8mb4;
@@ -28,12 +28,13 @@ CREATE TABLE `barang`  (
   `nomor_serial_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `status_barang` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `join_opd` int NOT NULL,
-  `koordinat_barang` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `detail_lokasi_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `koordinat_barang` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `keterangan_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tanggal_masuk` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE CURRENT_TIMESTAMP(6),
   `tanggal_update` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE CURRENT_TIMESTAMP(6),
-  `keterangan_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `join_user` int NOT NULL,
+  `gambar` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `join_update` int NULL DEFAULT NULL,
   PRIMARY KEY (`id_barang`) USING BTREE,
   INDEX `nama`(`join_user`) USING BTREE,
@@ -41,6 +42,7 @@ CREATE TABLE `barang`  (
   INDEX `merek_barang`(`join_merek_barang`) USING BTREE,
   INDEX `opd`(`join_opd`) USING BTREE,
   INDEX `update`(`join_update`) USING BTREE,
+  INDEX `gambar`(`gambar`) USING BTREE,
   CONSTRAINT `jenis_barang` FOREIGN KEY (`join_jenis_barang`) REFERENCES `jenis_barang` (`id_jenis_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `merek_barang` FOREIGN KEY (`join_merek_barang`) REFERENCES `merek_barang` (`id_merek_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `opd` FOREIGN KEY (`join_opd`) REFERENCES `opd` (`id_opd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -51,8 +53,8 @@ CREATE TABLE `barang`  (
 -- ----------------------------
 -- Records of barang
 -- ----------------------------
-INSERT INTO `barang` VALUES (6, 1, 1, '1234567890', 'baik', 7, '-0987654,345678', 'ruangan', '2023-07-18 22:56:01.866063', '2023-07-18 22:56:01.866063', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque animi maxime at minima. Totam vero omnis ducimus commodi placeat accusamus, repudiandae nemo, harum magni aperiam esse voluptates. Non, sapiente vero?', 1, NULL);
-INSERT INTO `barang` VALUES (9, 1, 5, '0987654321', 'rusak', 6, '-788769,674765', 'lapangan', '2023-07-19 14:35:18.943978', '2023-07-19 14:35:18.943978', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque animi maxime at minima. Totam vero omnis ducimus commodi placeat accusamus, repudiandae nemo, harum magni aperiam esse voluptates. Non, sapiente vero?', 1, NULL);
+INSERT INTO `barang` VALUES (6, 1, 1, '1234567890', 'baik', 7, 'ruangan', '-0987654,345678', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque animi maxime at minima. Totam vero omnis ducimus commodi placeat accusamus, repudiandae nemo, harum magni aperiam esse voluptates. Non, sapiente vero?', '2023-07-20 19:14:17.757804', '2023-07-20 19:14:17.757804', 1, 'database.png', NULL);
+INSERT INTO `barang` VALUES (9, 1, 5, '0987654321', 'rusak', 6, 'lapangan', '-788769,674765', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque animi maxime at minima. Totam vero omnis ducimus commodi placeat accusamus, repudiandae nemo, harum magni aperiam esse voluptates. Non, sapiente vero?', '2023-07-20 19:14:25.559398', '2023-07-20 19:14:25.559398', 1, 'login.png', NULL);
 
 -- ----------------------------
 -- Table structure for gambar
@@ -61,19 +63,16 @@ DROP TABLE IF EXISTS `gambar`;
 CREATE TABLE `gambar`  (
   `id_gambar` int NOT NULL AUTO_INCREMENT,
   `nama_gambar` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `join_barang` int NOT NULL,
   PRIMARY KEY (`id_gambar`) USING BTREE,
-  INDEX `nama_gambar`(`nama_gambar`) USING BTREE,
-  INDEX `barang`(`join_barang`) USING BTREE,
-  CONSTRAINT `barang` FOREIGN KEY (`join_barang`) REFERENCES `barang` (`id_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  INDEX `nama_gambar`(`nama_gambar`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gambar
 -- ----------------------------
-INSERT INTO `gambar` VALUES (12, 'database.png', 9);
-INSERT INTO `gambar` VALUES (16, 'login.png', 6);
-INSERT INTO `gambar` VALUES (17, 'pdm.png', 6);
+INSERT INTO `gambar` VALUES (12, 'database.png');
+INSERT INTO `gambar` VALUES (16, 'login.png');
+INSERT INTO `gambar` VALUES (17, 'pdm.png');
 
 -- ----------------------------
 -- Table structure for jenis_barang

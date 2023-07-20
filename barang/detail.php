@@ -11,7 +11,6 @@ JOIN merek_barang ON join_merek_barang = id_merek_barang
 JOIN jenis_barang ON join_jenis_barang = id_jenis_barang 
 JOIN opd ON join_opd = id_opd 
 JOIN user ON join_user = id_user
-JOIN gambar ON join_gambar = id_gambar
 WHERE id_barang = $id_barang ")[0];
 
 ?>
@@ -88,8 +87,8 @@ WHERE id_barang = $id_barang ")[0];
                         <td>Gambar Pedukung</td>
                         <td>:
 
-                            <a href="../gambar/<?= $barang["nama_gambar"]; ?>">
-                                <img src="../gambar/<?= $barang["nama_gambar"]; ?>" alt="nama_gambar" width="25%">
+                            <a href="../gambar/<?= $barang["gambar"]; ?>">
+                                <img src="../gambar/<?= $barang["gambar"]; ?>" alt="gambar" width="25%">
                             </a>
 
                         </td>
