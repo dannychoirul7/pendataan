@@ -22,7 +22,7 @@ if (isset($_POST["submit"])) {
     } else {
         echo "<script>
         alert('data gagal di ubah');
-        document.location.href = 'index.php';
+        document.location.href = 'ubah.php';
         </script>";
     }
 }

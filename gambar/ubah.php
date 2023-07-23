@@ -28,15 +28,14 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
-
 <h1 style="text-align: center;">Ubah Data Gambar</h1>
 
 <form action="" method="post" enctype="multipart/form-data">
     <input type="hidden" id="id_gambar" name="id_gambar" value="<?= $gambar["id_gambar"]; ?>">
-    <input type="hidden" id="nama_gambar_lama" name="nama_gambar_lama" value="<?= $gambar["nama_gambar_lama"]; ?>">
+    <input type="hidden" id="id_gambar" name="nama_gambar_lama" value="<?= $gambar["nama_gambar"]; ?>">
 
     <div class="form-group col-md-4 offset-4 mb-4">
-        <label for="keterangan_gambar">Keterangan gambar</label>
+        <label for="keterangan_gambar">Keterangan Gambar</label>
         <input type="text" class="form-control" id="keterangan_gambar" name="keterangan_gambar" value="<?= $gambar["keterangan_gambar"]; ?>" required>
     </div>
 

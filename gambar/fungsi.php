@@ -38,7 +38,7 @@ function ubah($data)
     // ambil data daritiap elemen dalam form
     $id_gambar = $data["id_gambar"];
     $keterangan_gambar = htmlspecialchars($data["keterangan_gambar"]);
-    $nama_gambar_lama = htmlspecialchars($data["nama_gambar_barang_lama"]);
+    $nama_gambar_lama = htmlspecialchars($data["nama_gambar_lama"]);
 
     if ($_FILES['nama_gambar']['error'] === 4) {
         $nama_gambar = $nama_gambar_lama;
