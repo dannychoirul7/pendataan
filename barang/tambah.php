@@ -4,7 +4,8 @@ require "fungsi.php";
 // cek apakah tombol submit sudah di tekan atau belum
 if (isset($_POST["submit"])) {
     var_dump($_POST);
-
+    print_r($_FILES);
+    // die;
     // data berhasil di tambahkan atau tidak
     if (tambah($_POST) > 0) {
         echo "<script>
@@ -33,7 +34,7 @@ if (isset($_POST["submit"])) {
 
                 $query = mysqli_query($db, "SELECT * FROM merek_barang");
                 if ($query == false) {
-                    die("Terdapat Kesalahan : " . mysqli_error($conn));
+                    die("Terdapat Kesalahan : " . mysqli_error($db));
                 }
                 while ($query2 = mysqli_fetch_assoc($query)) {
                     echo "<option value='$query2[id_merek_barang]'>$query2[nama_merek_barang]</option>";
@@ -44,8 +45,22 @@ if (isset($_POST["submit"])) {
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">
-        <label for="join_jenis_barang">Jenis Barang</label>
-        <input type="text" class="form-control" id="join_jenis_barang" name="join_jenis_barang" required>
+        <label>Jenis Barang</label>
+        <div class="input-group">
+            <select class="form-select" name="join_jenis_barang" id="join_jenis_barang" required>
+                <option value=""></option>
+                <?php
+
+                $query = mysqli_query($db, "SELECT * FROM jenis_barang");
+                if ($query == false) {
+                    die("Terdapat Kesalahan : " . mysqli_error($db));
+                }
+                while ($query2 = mysqli_fetch_assoc($query)) {
+                    echo "<option value='$query2[id_jenis_barang]'>$query2[nama_jenis_barang]</option>";
+                }
+                ?>
+            </select>
+        </div>
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">
@@ -63,8 +78,22 @@ if (isset($_POST["submit"])) {
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">
-        <label for="join_opd">Nama OPD</label>
-        <input type="text" class="form-control" id="join_opd" name="join_opd" required>
+        <label>Nama OPD</label>
+        <div class="input-group">
+            <select class="form-select" name="join_opd" id="join_opd" required>
+                <option value=""></option>
+                <?php
+
+                $query = mysqli_query($db, "SELECT * FROM opd");
+                if ($query == false) {
+                    die("Terdapat Kesalahan : " . mysqli_error($db));
+                }
+                while ($query2 = mysqli_fetch_assoc($query)) {
+                    echo "<option value='$query2[id_opd]'>$query2[nama_opd] - $query2[alamat_opd]</option>";
+                }
+                ?>
+            </select>
+        </div>
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">
@@ -83,13 +112,27 @@ if (isset($_POST["submit"])) {
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">
-        <label for="join_user">Nama User</label>
-        <input type="text" class="form-control" id="join_user" name="join_user" required>
+        <label>Nama User</label>
+        <div class="input-group">
+            <select class="form-select" name="join_user" id="join_user" required>
+                <option value=""></option>
+                <?php
+
+                $query = mysqli_query($db, "SELECT * FROM user");
+                if ($query == false) {
+                    die("Terdapat Kesalahan : " . mysqli_error($db));
+                }
+                while ($query2 = mysqli_fetch_assoc($query)) {
+                    echo "<option value='$query2[id_user]'>$query2[nama_user]</option>";
+                }
+                ?>
+            </select>
+        </div>
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">
-        <label for="join_gambar">Gambar Pedukung</label>
-        <input type="text" class="form-control" id="join_gambar" name="join_gambar" required>
+        <label for="gambar_barang">Gambar Pedukung</label>
+        <input type="file" class="form-control" id="gambar_barang" name="gambar_barang" required>
     </div>
 
     <div class="offset-4 mb-4">

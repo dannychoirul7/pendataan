@@ -19,6 +19,7 @@ $gambar = query("SELECT * FROM gambar ORDER BY id_gambar Asc");
           <thead>
             <tr style="text-align:center">
               <th width="5%" style="text-align:center">No</th>
+              <th width="25%" style="text-align:center">Keterangan Barang</th>
               <th style="text-align:center">Gambar Barang</th>
               <th width="15%" style="text-align:center">
                 <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
@@ -30,6 +31,7 @@ $gambar = query("SELECT * FROM gambar ORDER BY id_gambar Asc");
             <?php foreach ($gambar as $row) : ?>
               <tr>
                 <td width="5%" style="text-align: center;" scope="row"><?= $no; ?></td>
+                <td style="text-align: center;"><?= $row["keterangan_gambar"]; ?></td>
                 <td style="text-align: center;">
                   <a href="../gambar/<?= $row["nama_gambar"]; ?>">
                     <img src="../gambar/<?= $row["nama_gambar"]; ?>" alt="nama_gambar" width="15%">

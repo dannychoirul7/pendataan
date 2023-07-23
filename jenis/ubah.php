@@ -33,6 +33,7 @@ if (isset($_POST["submit"])) {
 
 <form action="" method="post">
     <input type="hidden" id="id_jenis_barang" name="id_jenis_barang" value="<?= $jenis_barang["id_jenis_barang"]; ?>">
+
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="nama_jenis_barang">Jenis Barang</label>
         <input type="text" class="form-control" id="nama_jenis_barang" name="nama_jenis_barang" value="<?= $jenis_barang["nama_jenis_barang"]; ?>" required>

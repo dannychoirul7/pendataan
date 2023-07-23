@@ -23,8 +23,13 @@ if (isset($_POST["submit"])) {
 
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="keterangan_gambar">Keterangan Gambar</label>
+        <input type="text" class="form-control" id="keterangan_gambar" name="keterangan_gambar" required>
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
         <label for="nama_gambar">Pilih Gambar</label>
-        <input type="file" class="form-control" id="nama_gambar" name="nama_gambar">
+        <input type="file" class="form-control" id="nama_gambar" name="nama_gambar" required>
     </div>
     <div class="offset-4 mb-4">
         <button type="submit" name="submit" class="btn btn-primary">Simpan</button>

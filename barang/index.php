@@ -6,7 +6,7 @@ JOIN merek_barang ON join_merek_barang = id_merek_barang
 JOIN jenis_barang ON join_jenis_barang = id_jenis_barang 
 JOIN opd ON join_opd = id_opd 
 JOIN user ON join_user = id_user
-");
+ORDER BY id_barang DESC");
 ?>
 
 <body>

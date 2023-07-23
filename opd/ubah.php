@@ -33,14 +33,17 @@ if (isset($_POST["submit"])) {
 
 <form action="" method="post">
     <input type="hidden" id="id_opd" name="id_opd" value="<?= $opd["id_opd"]; ?>">
+
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="nama_opd">Nama OPD</label>
         <input type="text" class="form-control" id="nama_opd" name="nama_opd" value="<?= $opd["nama_opd"]; ?>" required>
     </div>
+
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="alamat_opd">Ubah OPD</label>
         <input type="text" class="form-control" id="alamat_opd" name="alamat_opd" value="<?= $opd["alamat_opd"]; ?>" required>
     </div>
+
     <div class="offset-4 mb-4">
         <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
         <a class="btn btn-danger" href="index.php" role="button">Batal</a>

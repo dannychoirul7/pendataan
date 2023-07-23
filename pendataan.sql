@@ -11,7 +11,7 @@
  Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 20/07/2023 20:12:03
+ Date: 23/07/2023 14:27:36
 */
 
 SET NAMES utf8mb4;
@@ -31,30 +31,53 @@ CREATE TABLE `barang`  (
   `detail_lokasi_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `koordinat_barang` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `keterangan_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `tanggal_masuk` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE CURRENT_TIMESTAMP(6),
-  `tanggal_update` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE CURRENT_TIMESTAMP(6),
+  `tanggal_masuk_barang` timestamp NULL DEFAULT current_timestamp,
+  `tanggal_update_barang` timestamp NULL DEFAULT current_timestamp,
   `join_user` int NOT NULL,
-  `gambar` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `join_update` int NULL DEFAULT NULL,
+  `gambar_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_barang`) USING BTREE,
   INDEX `nama`(`join_user`) USING BTREE,
   INDEX `jenis_barang`(`join_jenis_barang`) USING BTREE,
   INDEX `merek_barang`(`join_merek_barang`) USING BTREE,
   INDEX `opd`(`join_opd`) USING BTREE,
-  INDEX `update`(`join_update`) USING BTREE,
-  INDEX `gambar`(`gambar`) USING BTREE,
+  INDEX `gambar`(`gambar_barang`) USING BTREE,
   CONSTRAINT `jenis_barang` FOREIGN KEY (`join_jenis_barang`) REFERENCES `jenis_barang` (`id_jenis_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `merek_barang` FOREIGN KEY (`join_merek_barang`) REFERENCES `merek_barang` (`id_merek_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `opd` FOREIGN KEY (`join_opd`) REFERENCES `opd` (`id_opd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `update` FOREIGN KEY (`join_update`) REFERENCES `update` (`id_update`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `user` FOREIGN KEY (`join_user`) REFERENCES `user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of barang
 -- ----------------------------
-INSERT INTO `barang` VALUES (6, 1, 1, '1234567890', 'baik', 7, 'ruangan', '-0987654,345678', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque animi maxime at minima. Totam vero omnis ducimus commodi placeat accusamus, repudiandae nemo, harum magni aperiam esse voluptates. Non, sapiente vero?', '2023-07-20 19:14:17.757804', '2023-07-20 19:14:17.757804', 1, 'database.png', NULL);
-INSERT INTO `barang` VALUES (9, 1, 5, '0987654321', 'rusak', 6, 'lapangan', '-788769,674765', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque animi maxime at minima. Totam vero omnis ducimus commodi placeat accusamus, repudiandae nemo, harum magni aperiam esse voluptates. Non, sapiente vero?', '2023-07-20 19:14:25.559398', '2023-07-20 19:14:25.559398', 1, 'login.png', NULL);
+
+-- ----------------------------
+-- Table structure for catatan
+-- ----------------------------
+DROP TABLE IF EXISTS `catatan`;
+CREATE TABLE `catatan`  (
+  `id_catatan` int NOT NULL AUTO_INCREMENT,
+  `id_barang_catatan` int NOT NULL DEFAULT current_timestamp,
+  `join_merek_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `join_jenis_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `nomor_serial_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `join_opd_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `detail_lokasi_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `koordinat_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `keterangan_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `tanggal_masuk_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `tanggal_update_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `join_user_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `gambar_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `keterangan_catatan` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id_catatan`) USING BTREE,
+  INDEX `tanggal_update`(`id_barang_catatan`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of catatan
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for gambar
@@ -62,17 +85,14 @@ INSERT INTO `barang` VALUES (9, 1, 5, '0987654321', 'rusak', 6, 'lapangan', '-78
 DROP TABLE IF EXISTS `gambar`;
 CREATE TABLE `gambar`  (
   `id_gambar` int NOT NULL AUTO_INCREMENT,
-  `nama_gambar` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  PRIMARY KEY (`id_gambar`) USING BTREE,
-  INDEX `nama_gambar`(`nama_gambar`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+  `keterangan_gambar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `nama_gambar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id_gambar`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gambar
 -- ----------------------------
-INSERT INTO `gambar` VALUES (12, 'database.png');
-INSERT INTO `gambar` VALUES (16, 'login.png');
-INSERT INTO `gambar` VALUES (17, 'pdm.png');
 
 -- ----------------------------
 -- Table structure for jenis_barang
@@ -109,12 +129,16 @@ CREATE TABLE `merek_barang`  (
   `nama_merek_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_merek_barang`) USING BTREE,
   INDEX `nama_merek_barang`(`nama_merek_barang`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of merek_barang
 -- ----------------------------
 INSERT INTO `merek_barang` VALUES (1, 'merek1');
+INSERT INTO `merek_barang` VALUES (4, 'merek2');
+INSERT INTO `merek_barang` VALUES (5, 'merek3');
+INSERT INTO `merek_barang` VALUES (6, 'merek4');
+INSERT INTO `merek_barang` VALUES (7, 'merek5');
 
 -- ----------------------------
 -- Table structure for opd
@@ -135,22 +159,7 @@ CREATE TABLE `opd`  (
 -- ----------------------------
 INSERT INTO `opd` VALUES (6, 'mjkt', 'mojokerto');
 INSERT INTO `opd` VALUES (5, 'sby', 'surabaya');
-INSERT INTO `opd` VALUES (7, 'sby', 'adoh');
-
--- ----------------------------
--- Table structure for update
--- ----------------------------
-DROP TABLE IF EXISTS `update`;
-CREATE TABLE `update`  (
-  `id_update` int NOT NULL AUTO_INCREMENT,
-  `tanggal_update` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE CURRENT_TIMESTAMP(6),
-  PRIMARY KEY (`id_update`) USING BTREE,
-  INDEX `tanggal_update`(`tanggal_update`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of update
--- ----------------------------
+INSERT INTO `opd` VALUES (7, 'surabaya', 'adoh');
 
 -- ----------------------------
 -- Table structure for user

@@ -38,7 +38,7 @@ function ubah($data)
     // ambil data daritiap elemen dalam form
     $id_gambar = $data["id_gambar"];
     $keterangan_gambar = htmlspecialchars($data["keterangan_gambar"]);
-    $nama_gambar_lama = htmlspecialchars($data["nama_gambar_barang_lama"]);
+    $nama_gambar_lama = htmlspecialchars($data["nama_gambar_lama"]);
 
     if ($_FILES['nama_gambar']['error'] === 4) {
         $nama_gambar = $nama_gambar_lama;
@@ -56,14 +56,15 @@ function ubah($data)
 
     // query update data
     $query = "UPDATE gambar SET
-            keterangan_gambar ='$keterangan_gambar', 
-            nama_gambar ='$nama_gambar'
+            keterangan_gambar = '$keterangan_gambar',
+            nama_gambar = '$nama_gambar'          
             WHERE id_gambar = $id_gambar     
         ";
     mysqli_query($db, $query);
 
     return mysqli_affected_rows($db);
 }
+
 
 function upload()
 {

@@ -2,9 +2,9 @@
 
 require "fungsi.php";
 
-$id_opd = $_GET["id_opd"];
+$id_barang = $_GET["id_barang"];
 
-if (hapus($id_opd) > 0) {
+if (hapus($id_barang) > 0) {
     echo "<script>
     alert('data sukses di hapus');
     document.location.href = 'index.php';

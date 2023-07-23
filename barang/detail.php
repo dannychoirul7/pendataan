@@ -69,12 +69,12 @@ WHERE id_barang = $id_barang ")[0];
 
                     <tr>
                         <td>Tanggal Awal Barang Terpasang</td>
-                        <td>: <?= $barang['tanggal_masuk']; ?> </td>
+                        <td>: <?= $barang['tanggal_masuk_barang']; ?> </td>
                     </tr>
 
                     <tr>
                         <td>Tanggal Terakhir Update</td>
-                        <td>: <?= $barang['tanggal_update']; ?> </td>
+                        <td>: <?= $barang['tanggal_update_barang']; ?> </td>
                     </tr>
 
                     <tr>
@@ -87,15 +87,18 @@ WHERE id_barang = $id_barang ")[0];
                         <td>Gambar Pedukung</td>
                         <td>:
 
-                            <a href="../gambar/<?= $barang["gambar"]; ?>">
-                                <img src="../gambar/<?= $barang["gambar"]; ?>" alt="gambar" width="25%">
+                            <a href="../gambar/<?= $barang["gambar_barang"]; ?>">
+                                <img src="../gambar/<?= $barang["gambar_barang"]; ?>" alt="gambar" width="25%">
                             </a>
 
                         </td>
                     </tr>
 
                 </table>
-                <a style="float: right;" class="btn btn-sm btn-danger" href="index.php" role="button">Kembali</a>
+
+                <a style="float: right;" class="btn btn-sm btn-warning m-1" href="ubah.php?id_barang=<?= $barang["id_barang"]; ?>" role="button">Ubah</a>
+                <a style="float: right;" class="btn btn-sm btn-danger m-1" href="index.php" role="button">Kembali</a>
+
             </div>
         </div>
     </div>
