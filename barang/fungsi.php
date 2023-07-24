@@ -22,8 +22,32 @@ function tambah($data)
     }
 
     // query insert data
-    $query = "INSERT INTO barang(join_merek_barang,join_jenis_barang,nomor_serial_barang,status_barang,join_opd,detail_lokasi_barang,koordinat_barang,keterangan_barang,tanggal_masuk_barang,tanggal_update_barang,join_user,gambar_barang)
-    VALUES ('$join_merek_barang','$join_jenis_barang','$nomor_serial_barang','$status_barang','$join_opd','$detail_lokasi_barang',' $koordinat_barang',' $keterangan_barang','$tanggal_masuk_barang ',' $tanggal_update_barang',' $join_user','$gambar_barang')";
+    $query = "INSERT INTO barang(
+        join_merek_barang,
+        join_jenis_barang,
+        nomor_serial_barang,
+        status_barang,
+        join_opd,
+        detail_lokasi_barang,
+        koordinat_barang,
+        keterangan_barang,
+        tanggal_masuk_barang,
+        tanggal_update_barang,
+        join_user,
+        gambar_barang)
+    VALUES (
+    '$join_merek_barang',
+    '$join_jenis_barang',
+    '$nomor_serial_barang',
+    '$status_barang',
+    '$join_opd',
+    '$detail_lokasi_barang',
+    '$koordinat_barang',
+    '$keterangan_barang',
+    '$tanggal_masuk_barang',
+    '$tanggal_update_barang',
+    '$join_user',
+    '$gambar_barang')";
     mysqli_query($db, $query);
 
     return mysqli_affected_rows($db);

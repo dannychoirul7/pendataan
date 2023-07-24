@@ -76,12 +76,12 @@
         </li>
         <li>
           <a class="text-white" href="gambar/index.php">
-            Music
+            Gambar
           </a>
         </li>
         <li>
-          <a class="text-white" href="#">
-            Film
+          <a class="text-white" href="catatan/index.php">
+            Catatan
           </a>
         </li>
         <li>
