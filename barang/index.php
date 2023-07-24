@@ -29,8 +29,8 @@ ORDER BY id_barang DESC");
               <th style="text-align:center">Nomor serial barang</th>
               <th style="text-align:center">Nama Opd</th>
               <th style="text-align:center">Alamat Opd</th>
-              <th style="text-align:center">status_barang</th>
-              <th style="text-align:center">nama_user</th>
+              <th style="text-align:center">Status Barang</th>
+              <th style="text-align:center">Nama User</th>
               <th width="15%" style="text-align:center">
                 <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
               </th>

@@ -1,12 +1,8 @@
 <?php
 require '../header.php';
-require "fungsi.php";
-$barang = query("SELECT * FROM barang 
-JOIN merek_barang ON join_merek_barang = id_merek_barang 
-JOIN jenis_barang ON join_jenis_barang = id_jenis_barang 
-JOIN opd ON join_opd = id_opd 
-JOIN user ON join_user = id_user
-ORDER BY id_barang DESC");
+require "../koneksi.php";
+$catatan = query("SELECT * FROM catatan 
+ORDER BY id_catatan DESC");
 ?>
 
 <body>
@@ -19,40 +15,44 @@ ORDER BY id_barang DESC");
     </button>
     <div class="card mt-5">
       <div class="card-body">
-        <h1 style="text-align:center">DATA BARANG</h1>
+        <h1 style="text-align:center">DATA CATATAN</h1>
         <table class="table table-striped" id="datatable">
           <thead>
             <tr style="text-align:center">
               <th width="15%" style="text-align:center">No</th>
-              <th style="text-align:center">Merek Barang</th>
-              <th style="text-align:center">Jenis Barang</th>
-              <th style="text-align:center">Nomor serial barang</th>
-              <th style="text-align:center">Nama Opd</th>
-              <th style="text-align:center">Alamat Opd</th>
-              <th style="text-align:center">status_barang</th>
-              <th style="text-align:center">nama_user</th>
-              <th width="15%" style="text-align:center">
-                <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
-              </th>
+              <th style="text-align:center">merek_barang</th>
+              <th style="text-align:center">jenis_barang</th>
+              <th style="text-align:center">nomor_serial</th>
+              <th style="text-align:center">status barang</th>
+              <th style="text-align:center">opd</th>
+              <th style="text-align:center">detail_lokasi_barang</th>
+              <th style="text-align:center">koordinat_barang</th>
+              <th style="text-align:center">keterangan_barang</th>
+              <th style="text-align:center">tanggal_masuk_barang</th>
+              <th style="text-align:center">tanggal_update_barang</th>
+              <th style="text-align:center">user</th>
+              <th style="text-align:center">gambar_barang</th>
+              <th style="text-align:center">keterangan_catatan</th>
             </tr>
           </thead>
           <tbody>
             <?php $no = 1; ?>
-            <?php foreach ($barang as $row) : ?>
+            <?php foreach ($catatan as $row) : ?>
               <tr>
                 <td width="5%" style="text-align: center;" scope="row"><?= $no; ?></td>
-                <td style="text-align: center;"><?= $row["nama_merek_barang"]; ?></td>
-                <td style="text-align: center;"><?= $row["nama_jenis_barang"]; ?></td>
-                <td style="text-align: center;"><?= $row["nomor_serial_barang"]; ?></td>
-                <td style="text-align: center;"><?= $row["nama_opd"]; ?></td>
-                <td style="text-align: center;"><?= $row["alamat_opd"]; ?></td>
-                <td style="text-align: center;"><?= $row["status_barang"]; ?></td>
-                <td style="text-align: center;"><?= $row["nama_user"]; ?></td>
-                <td style="text-align: center">
-                  <a class="btn btn-sm btn-dark" href="detail.php?id_barang=<?= $row["id_barang"]; ?>" role="button">Detail</a>
-                  <a class="btn btn-sm btn-warning" href="ubah.php?id_barang=<?= $row["id_barang"]; ?>" role="button">Ubah</a>
-                  <a class="btn btn-sm btn-danger" href="hapus.php?id_barang=<?= $row["id_barang"]; ?>" onclick="return confirm('yakin?');" role="button">Hapus</a>
-                </td>
+                <td style="text-align: center;"><?= $row["join_merek_barang_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["join_jenis_barang_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["nomor_serial_barang_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["status_barang_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["join_opd_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["detail_lokasi_barang_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["koordinat_barang_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["keterangan_barang_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["tanggal_masuk_barang_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["tanggal_update_barang_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["join_user_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["gambar_barang_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["keterangan_catatan"]; ?></td>
               </tr>
             <?php $no++;
             endforeach; ?>
