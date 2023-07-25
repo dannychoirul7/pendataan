@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
 
 <form action="" method="post" enctype="multipart/form-data">
     <input type="hidden" id="id_barang" name="id_barang" value="<?= $barang["id_barang"]; ?>">
-    <input type="hidden" id="gambar_barang" name="gambar_barang_lama" value="<?= $barang["gambar_barang"]; ?>">
+    <input type="hidden" id="id_barang" name="gambar_barang_lama" value="<?= $barang["gambar_barang"]; ?>">
 
     <div class="form-group col-md-4 offset-4 mb-4">
         <label>Merek Barang</label>
@@ -185,11 +185,8 @@ if (isset($_POST["submit"])) {
 
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="gambar_barang">Gambar</label>
-        <input class="form-control" id="gambar_barang" name="gambar_barang" type="file">
-        <br>
-        <a href="../gambar/<?= $barang["gambar_barang"]; ?>">
-            <img src="../gambar/<?= $barang["gambar_barang"]; ?>" alt="gambar_barang" width="100%">
-        </a>
+        <input class="form-control" id="gambar_barang" name="gambar_barang" type="file" onchange="previewImg()">
+        <img src="../gambar/<?= $barang["gambar_barang"]; ?>" alt="" class="img-thumbnail img-preview mt-2" width="1000px">
     </div>
 
     <div class="offset-7 mb-4">
@@ -198,6 +195,21 @@ if (isset($_POST["submit"])) {
     </div>
 
 </form>
+
+<!-- preview gambar -->
+<script>
+    function previewImg() {
+        const gambar_barang = document.querySelector('#gambar_barang');
+        const imgPreview = document.querySelector('.img-preview');
+
+        const fileFoto = new FileReader();
+        fileFoto.readAsDataURL(gambar_barang.files[0]);
+
+        fileFoto.onload = function(e) {
+            imgPreview.src = e.target.result;
+        }
+    }
+</script>
 <?php
 require "../footer.php";
 ?>

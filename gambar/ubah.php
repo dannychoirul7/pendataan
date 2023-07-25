@@ -41,11 +41,8 @@ if (isset($_POST["submit"])) {
 
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="nama_gambar">Gambar</label>
-        <input class="form-control" id="nama_gambar" name="nama_gambar" type="file">
-        <br>
-        <a href="../gambar/<?= $gambar["nama_gambar"]; ?>">
-            <img src="../gambar/<?= $gambar["nama_gambar"]; ?>" alt="nama_gambar" width="100%">
-        </a>
+        <input class="form-control" id="nama_gambar" name="nama_gambar" type="file" onchange="previewImg()">
+        <img src="../gambar/<?= $gambar["nama_gambar"]; ?>" alt="" class="img-thumbnail img-preview mt-2" width="1000px">
     </div>
 
     <div class="offset-4 mb-4">
@@ -54,6 +51,21 @@ if (isset($_POST["submit"])) {
     </div>
 
 </form>
+
+<!-- preview gambar -->
+<script>
+    function previewImg() {
+        const nama_gambar = document.querySelector('#nama_gambar');
+        const imgPreview = document.querySelector('.img-preview');
+
+        const fileFoto = new FileReader();
+        fileFoto.readAsDataURL(nama_gambar.files[0]);
+
+        fileFoto.onload = function(e) {
+            imgPreview.src = e.target.result;
+        }
+    }
+</script>
 <?php
 require "../footer.php";
 ?>

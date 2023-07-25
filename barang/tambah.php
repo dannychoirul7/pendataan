@@ -132,15 +132,31 @@ if (isset($_POST["submit"])) {
 
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="gambar_barang">Gambar Pedukung</label>
-        <input type="file" class="form-control" id="gambar_barang" name="gambar_barang" required>
+        <input type="file" class="form-control" id="gambar_barang" name="gambar_barang" onchange="previewImg()">
+        <img src="" alt="" class="img-thumbnail img-preview mt-2" width="1000px">
     </div>
 
-    <div class="offset-4 mb-4">
+    <div class=" offset-4 mb-4">
         <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
         <a class="btn btn-danger" href="index.php" role="button">Batal</a>
     </div>
 
 </form>
+
+<!-- preview gambar -->
+<script>
+    function previewImg() {
+        const gambar_barang = document.querySelector('#gambar_barang');
+        const imgPreview = document.querySelector('.img-preview');
+
+        const fileFoto = new FileReader();
+        fileFoto.readAsDataURL(gambar_barang.files[0]);
+
+        fileFoto.onload = function(e) {
+            imgPreview.src = e.target.result;
+        }
+    }
+</script>
 <?php
 require "../footer.php";
 ?>
