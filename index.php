@@ -1,3 +1,13 @@
+<?php
+
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+  alert('Masukkan Username dan Password');
+  document.location.href ='login.php';
+  </script>";
+  exit;
+}
+?>
 <!-- header.php -->
 <!DOCTYPE html>
 <html>
@@ -185,6 +195,7 @@
   <footer>
     <!-- Tambahkan elemen-elemen footer -->
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+
     <script>
       // event will be executed when the toggle-button is clicked
       document.getElementById("button-toggle").addEventListener("click", () => {
