@@ -63,8 +63,8 @@
       </a>
     </li>
     <li>
-      <a class="text-white" href="#">
-        Bookmark
+      <a class="text-white" href=".../pengguna/index.php">
+        Daftar Pengguna
       </a>
     </li>
     <li class="border-top my-3"></li>

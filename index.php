@@ -1,3 +1,13 @@
+<?php
+
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+  alert('Masukkan penggunaname dan Password');
+  document.location.href ='login.php';
+  </script>";
+  exit;
+}
+?>
 <!-- header.php -->
 <!DOCTYPE html>
 <html>
@@ -85,8 +95,8 @@
           </a>
         </li>
         <li>
-          <a class="text-white" href="#">
-            Bookmark
+          <a class="text-white" href="pengguna/index.php">
+            Daftar Pengguna
           </a>
         </li>
         <li class="border-top my-3"></li>
@@ -150,7 +160,7 @@
                   <div class="inner">
                     <h3>44</h3>
 
-                    <p>User Registrations</p>
+                    <p>pengguna Registrations</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-person-add"></i>
@@ -185,6 +195,7 @@
   <footer>
     <!-- Tambahkan elemen-elemen footer -->
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+
     <script>
       // event will be executed when the toggle-button is clicked
       document.getElementById("button-toggle").addEventListener("click", () => {

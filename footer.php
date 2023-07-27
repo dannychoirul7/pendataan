@@ -5,6 +5,7 @@
   <script type="text/javascript" src="../assets/js/jquery-3.7.0.js"></script>
   <script type="text/javascript" src="../assets/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="../assets/js/dataTables.bootstrap5.min.js"></script>
+  <script type="text/javascript" src="../assets/js/all.js"></script>
   <script>
     // event will be executed when the toggle-button is clicked
     document.getElementById("button-toggle").addEventListener("click", () => {

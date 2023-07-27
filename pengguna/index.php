@@ -1,0 +1,53 @@
+<?php
+require '../header.php';
+require "fungsi.php";
+$pengguna = query("SELECT * FROM pengguna ORDER BY id_pengguna Asc");
+?>
+
+<body>
+  <?php
+  require '../side.php';
+  ?>
+  <div class="p-4" id="main-content">
+    <button class="btn btn-primary" id="button-toggle">
+      Toggle Menu
+    </button>
+    <div class="card mt-5">
+      <div class="card-body">
+        <h1 style="text-align:center">Daftar pengguna </h1>
+        <table class="table table-striped" id="datatable">
+          <thead>
+            <tr style="text-align:center">
+              <th style="text-align:center" style="width: 15%">No</th>
+              <th width="25%" style="text-align:center">username</th>
+              <th style="text-align:center">Password</th>
+              <th style="text-align:center">Nama pengguna</th>
+              <th style="text-align:center">Level pengguna</th>
+              <th width="15%" style="text-align:center">
+                <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
+              </th>
+            </tr>
+          <tbody>
+            <?php $no = 1; ?>
+            <?php foreach ($pengguna as $row) : ?>
+              <tr>
+                <td width="5%" style="text-align: center;" scope="row"><?= $no; ?></td>
+                <td style="text-align: center;"><?= $row["username_pengguna"]; ?></td>
+                <td style="text-align: center;">*****************</td>
+                <td style="text-align: center;"><?= $row["nama_pengguna"]; ?></td>
+                <td style="text-align: center;"><?= $row["level_pengguna"]; ?></td>
+                <td style="text-align: center">
+                  <a class="btn btn-sm btn-warning" href="ubah.php?id_pengguna=<?= $row["id_pengguna"]; ?>" role="button">ubah</a>
+                  <a class="btn btn-sm btn-danger" href="hapus.php?id_pengguna=<?= $row["id_pengguna"]; ?>" onclick="return confirm('yakin?');" role="button">hapus</a>
+                </td>
+              </tr>
+            <?php $no++;
+            endforeach; ?>
+          </tbody>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+<?php require '../footer.php'; ?>
