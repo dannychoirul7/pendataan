@@ -11,7 +11,7 @@
  Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 24/07/2023 20:48:52
+ Date: 27/07/2023 21:33:44
 */
 
 SET NAMES utf8mb4;
@@ -44,13 +44,12 @@ CREATE TABLE `barang`  (
   CONSTRAINT `jenis_barang` FOREIGN KEY (`join_jenis_barang`) REFERENCES `jenis_barang` (`id_jenis_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `merek_barang` FOREIGN KEY (`join_merek_barang`) REFERENCES `merek_barang` (`id_merek_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `opd` FOREIGN KEY (`join_opd`) REFERENCES `opd` (`id_opd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `user` FOREIGN KEY (`join_user`) REFERENCES `user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+  CONSTRAINT `user` FOREIGN KEY (`join_user`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of barang
 -- ----------------------------
-INSERT INTO `barang` VALUES (28, 4, 2, 'qqq43', 'Normal', 6, 'dda', 'BARU', ' sau', '2023-07-24 20:38:09', '2023-07-24 20:38:09', 1, '64be7ec1b0781.png');
 
 -- ----------------------------
 -- Table structure for catatan
@@ -74,12 +73,23 @@ CREATE TABLE `catatan`  (
   `keterangan_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_catatan`) USING BTREE,
   INDEX `tanggal_update`(`id_barang_catatan`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of catatan
 -- ----------------------------
 INSERT INTO `catatan` VALUES (4, 28, '4', '2', 'qqq43', 'Normal', '6', 'dda', 'BARU', ' sau', '2023-07-24 20:38:09', '2023-07-24 20:38:09', '1', '64be7ec1b0781.png', 'data masuk');
+INSERT INTO `catatan` VALUES (5, 28, '4', '2', 'qqq43', 'Normal', '6', 'dda', 'BARU', ' sau', '2023-07-24 20:38:09', '2023-07-24 20:38:09', '1', '64be7ec1b0781.png', 'data di hapus');
+INSERT INTO `catatan` VALUES (6, 29, '4', '9', 'qqq43', 'Normal', '6', 'erfs', 'BARU', 'BARU', '2023-07-25 19:55:08', '2023-07-25 19:55:09', '1', '64bfc62d23435.png', 'data masuk');
+INSERT INTO `catatan` VALUES (7, 29, '4', '9', 'qqq43', 'Normal', '6', 'erfs', 'BARU', 'BARU', '2023-07-25 19:55:08', '2023-07-25 19:55:09', '1', '64bfc62d23435.png', 'data di hapus');
+INSERT INTO `catatan` VALUES (8, 30, '5', '5', 's', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'd', '2023-07-25 20:02:15', '2023-07-25 20:02:15', '1', '64bfc7d731220.png', 'data masuk');
+INSERT INTO `catatan` VALUES (9, 30, '5', '5', 's', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'd', '2023-07-25 20:02:15', '2023-07-25 20:02:22', '1', '64bfc7d731220.png', 'data berubah');
+INSERT INTO `catatan` VALUES (10, 30, '6', '5', 's', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'd', '2023-07-25 20:02:15', '2023-07-25 20:02:38', '1', '64bfc7d731220.png', 'data berubah');
+INSERT INTO `catatan` VALUES (11, 30, '6', '5', 's', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'd', '2023-07-25 20:02:15', '2023-07-25 20:02:58', '1', '64bfc80225616.png', 'data berubah');
+INSERT INTO `catatan` VALUES (12, 30, '6', '5', 's', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'd', '2023-07-25 20:02:15', '2023-07-25 20:31:19', '1', '64bfcea71f038.png', 'data berubah');
+INSERT INTO `catatan` VALUES (13, 30, '6', '5', 's', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'd', '2023-07-25 20:02:15', '2023-07-25 20:31:29', '1', '64bfceb199b07.png', 'data berubah');
+INSERT INTO `catatan` VALUES (14, 30, '6', '5', 's', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'd', '2023-07-25 20:02:15', '2023-07-25 20:32:44', '1', '64bfcefc3bac8.png', 'data berubah');
+INSERT INTO `catatan` VALUES (15, 30, '6', '5', 's', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'd', '2023-07-25 20:02:15', '2023-07-25 20:32:44', '1', '64bfcefc3bac8.png', 'data di hapus');
 
 -- ----------------------------
 -- Table structure for gambar
@@ -90,7 +100,7 @@ CREATE TABLE `gambar`  (
   `keterangan_gambar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `nama_gambar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_gambar`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gambar
@@ -164,23 +174,25 @@ INSERT INTO `opd` VALUES (5, 'sby', 'surabaya');
 INSERT INTO `opd` VALUES (7, 'surabaya', 'adoh');
 
 -- ----------------------------
--- Table structure for user
+-- Table structure for pengguna
 -- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-  `id_user` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `nama_user` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `level` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  PRIMARY KEY (`id_user`) USING BTREE,
-  INDEX `nama_user`(`nama_user`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+DROP TABLE IF EXISTS `pengguna`;
+CREATE TABLE `pengguna`  (
+  `id_pengguna` int NOT NULL AUTO_INCREMENT,
+  `username_pengguna` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `password_pengguna` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `nama_pengguna` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `level_pengguna` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY (`id_pengguna`) USING BTREE,
+  INDEX `nama_user`(`nama_pengguna`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of user
+-- Records of pengguna
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'user', 'user', 'biasa', '1');
+INSERT INTO `pengguna` VALUES (3, '', '2', '2', 'satu');
+INSERT INTO `pengguna` VALUES (4, '', '6', '7', 'dua');
+INSERT INTO `pengguna` VALUES (6, 'uwu', '$2y$10$5aWrjMpc5M4gIXyzc8vNEOXI9hTxIEP/y2nBwuKvX4MxqJShDjWMu', 'uwu', 'tiga');
 
 -- ----------------------------
 -- Triggers structure for table barang
