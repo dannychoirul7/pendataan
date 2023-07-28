@@ -1,12 +1,12 @@
 <?php
-
-if (!isset($_SESSION["login"])) {
-  echo "<script>
-  alert('Masukkan penggunaname dan Password');
-  document.location.href ='login.php';
-  </script>";
-  exit;
-}
+// session_start();
+// if (!isset($_SESSION["login"])) {
+//   echo "<script>
+//   alert('Masukkan name dan Password');
+//   document.location.href ='login.php';
+//   </script>";
+//   exit;
+// }
 ?>
 <!-- header.php -->
 <!DOCTYPE html>

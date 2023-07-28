@@ -3,15 +3,14 @@ require "../header.php";
 require "fungsi.php";
 
 // ambil datadi URL
-$id_opd = $_GET["id_opd"];
+$id_pengguna = $_GET["id_pengguna"];
 
 // query data mahasiswa berdasarkan id
-$opd = query("SELECT * FROM opd WHERE id_opd = $id_opd ")[0];
+$pengguna = query("SELECT * FROM pengguna WHERE id_pengguna = $id_pengguna ")[0];
 
 // cek apakah tombol submit sudah di tekan atau belum
 if (isset($_POST["submit"])) {
     var_dump($_POST);
-
 
     // data berhasil di ubah atau tidak
     if (ubah($_POST) > 0) {
@@ -29,19 +28,39 @@ if (isset($_POST["submit"])) {
 ?>
 
 
-<h1 style="text-align: center;">Ubah Data OPD(Organisasi Perangkat Daerah)</h1>
+<h1 style="text-align: center;">Ubah Data Pengguna</h1>
 
 <form action="" method="post">
-    <input type="hidden" id="id_opd" name="id_opd" value="<?= $opd["id_opd"]; ?>">
+    <input type="hidden" id="id_pengguna" name="id_pengguna" value="<?= $pengguna["id_pengguna"]; ?>">
 
     <div class="form-group col-md-4 offset-4 mb-4">
-        <label for="nama_opd">Nama OPD</label>
-        <input type="text" class="form-control" id="nama_opd" name="nama_opd" value="<?= $opd["nama_opd"]; ?>" required>
+        <label for="username_pengguna">Username</label>
+        <input type="text" class="form-control" id="username_pengguna" name="username_pengguna" value="<?= $pengguna["username_pengguna"]; ?>" minlength="6" required>
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">
-        <label for="alamat_opd">Ubah OPD</label>
-        <input type="text" class="form-control" id="alamat_opd" name="alamat_opd" value="<?= $opd["alamat_opd"]; ?>" required>
+        <label for="password_pengguna">password</label>
+        <input type="password" class="form-control" id="password_pengguna" name="password_pengguna" required>
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="password_pengguna2">password ulang</label>
+        <input type="password" class="form-control" id="password_pengguna2" name="password_pengguna2" required>
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="nama_pengguna">Nama pengguna</label>
+        <input type="text" class="form-control" id="nama_pengguna" name="nama_pengguna" value="<?= $pengguna["nama_pengguna"]; ?>" required>
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="level_pengguna">Level pengguna</label>
+        <select class="form-select" id="level_pengguna" name="level_pengguna" required>
+            <?= $level_pengguna = $pengguna["level_pengguna"]; ?>
+            <option value="satu" <?= $level_pengguna == 'satu'?'selected' : null ?>>Admin</option>
+            <option value="dua" <?= $level_pengguna == 'dua'?'selected' : null ?>>Petugas</option>
+            <option value="tiga" <?= $level_pengguna == 'tiga'?'selected' : null ?>>Staff Lapangan</option>
+        </select>
     </div>
 
     <div class="offset-4 mb-4">

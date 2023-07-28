@@ -25,11 +25,17 @@ if (isset($_POST["submit"])) {
 <form action="" method="post">
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="username_pengguna">username</label>
-        <input type="text" class="form-control" id="username_pengguna" name="username_pengguna" required>
+        <input type="text" class="form-control" id="username_pengguna" name="username_pengguna" required minlength="6">
     </div>
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="password_pengguna">Password</label>
-        <input type="password" class="form-control" id="password_pengguna" name="password_pengguna" required>
+        <input type="password" class="form-control" id="password_pengguna" name="password_pengguna" required minlength="6">
+    </div>
+
+    <div class="form-group col-md-4 offset-4 mb-4">
+        <label for="password_pengguna2">Password Ulang</label>
+        <input type="password" class="form-control" id="password_pengguna2" name="password_pengguna2" required
+        >
     </div>
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="nama_pengguna">Nama pengguna</label>

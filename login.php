@@ -1,5 +1,52 @@
 <?php
-session_start();
+// session_start();
+if (isset($_SESSION["login"])) {
+    header("Location:index.php");
+    exit;
+}
+
+require 'koneksi.php';
+global $db;
+
+if (isset($_POST["login"])) {
+    $username_pengguna = mysqli_real_escape_string($db, $_POST["username_pengguna"]);
+    $password_pengguna = mysqli_real_escape_string($db, $_POST["password_pengguna"]);
+    $_SESSION["username_pengguna"] = $username_pengguna;
+    $result = mysqli_query($db, "SELECT * FROM pengguna WHERE username_pengguna = '$username_pengguna'");
+
+    // cek username
+    if (mysqli_num_rows($result) === 1) {
+        // cek password
+        $row = mysqli_fetch_assoc($result);
+        if (password_verify($password_pengguna, $row["password_pengguna"])) { // bandingkan password inputan dengan database
+
+            //multilevel user
+            if ($row["level_pengguna"] == "nol") {
+                $_SESSION["level_pengguna"] = "nol";
+                header("Location:index.php");
+                $_SESSION["login"] = true;
+                exit;
+            } else if ($row["level_pengguna"] == "satu") {
+                $_SESSION["level_pengguna"] = "satu";
+                header("Location:index.php");
+                $_SESSION["login"] = true;
+                exit;
+            } else if ($row["level_pengguna"] == "dua") {
+                $_SESSION["level_pengguna"] = "dua";
+                header("Location:index.php");
+                $_SESSION["login"] = true;
+                exit;
+          } else if ($row["level_pengguna"] == "tiga") {
+            $_SESSION["level_pengguna"] = "tiga";
+            header("Location:index.php");
+            $_SESSION["login"] = true;
+            exit;
+        }
+        }
+    }
+    $error = true;
+}
+?>
 
 ?>
 <!doctype html>
@@ -43,16 +90,16 @@ session_start();
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
   <main class="form-signin w-100 m-auto">
-    <form>
+    <form action="" method="post" >
 
       <h1 style="text-align: center;" class="h3 mb-3 fw-normal">Login</h1>
 
       <div class="form-floating">
-        <input type="username" class="form-control" id="floatingInput" name="username">
+        <input type="username" class="form-control" id="floatingInput" name="username_pengguna">
         <label for="floatingInput">username</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" name="password">
+        <input type="password" class="form-control" id="floatingPassword" name="password_pengguna">
         <label for="floatingPassword">Password</label>
       </div>
 
