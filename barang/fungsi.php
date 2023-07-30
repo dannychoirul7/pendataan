@@ -1,4 +1,5 @@
 <?php
+
 require "../koneksi.php";
 
 function tambah($data)
@@ -15,7 +16,7 @@ function tambah($data)
     $keterangan_barang = htmlspecialchars($data["keterangan_barang"]);
     $tanggal_masuk_barang = date('Y-m-d H:i:s');
     $tanggal_update_barang = date('Y-m-d H:i:s');
-    $join_user = htmlspecialchars($data["join_user"]);
+    $join_pengguna = $_SESSION['id_pengguna'];
     $gambar_barang = upload();
     if (!$gambar_barang) {
         return false;
@@ -33,7 +34,7 @@ function tambah($data)
         keterangan_barang,
         tanggal_masuk_barang,
         tanggal_update_barang,
-        join_user,
+        join_pengguna,
         gambar_barang)
     VALUES (
     '$join_merek_barang',
@@ -46,7 +47,7 @@ function tambah($data)
     '$keterangan_barang',
     '$tanggal_masuk_barang',
     '$tanggal_update_barang',
-    '$join_user',
+    '$join_pengguna',
     '$gambar_barang')";
     mysqli_query($db, $query);
 
@@ -79,7 +80,7 @@ function ubah($data)
     $koordinat_barang = htmlspecialchars($data["koordinat_barang"]);
     $keterangan_barang = htmlspecialchars($data["keterangan_barang"]);
     $tanggal_update_barang = date('Y-m-d H:i:s');
-    $join_user = htmlspecialchars($data["join_user"]);
+    $join_pengguna = $_SESSION['id_pengguna'];
     $gambar_barang_lama = htmlspecialchars($data["gambar_barang_lama"]);
 
     if ($_FILES['gambar_barang']['error'] === 4) {
@@ -107,7 +108,7 @@ function ubah($data)
             koordinat_barang ='$koordinat_barang',
             keterangan_barang ='$keterangan_barang',
             tanggal_update_barang = '$tanggal_update_barang',
-            join_user ='$join_user',
+            join_pengguna ='$join_pengguna',
             gambar_barang ='$gambar_barang'
             WHERE id_barang = $id_barang     
         ";

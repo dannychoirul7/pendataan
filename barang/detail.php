@@ -1,4 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+    alert('Masukkan name dan Password');
+    document.location.href ='login.php';
+    </script>";
+    exit;
+}
+
 require '../header.php';
 require "fungsi.php";
 
@@ -10,7 +19,7 @@ $barang = query("SELECT * FROM barang
 JOIN merek_barang ON join_merek_barang = id_merek_barang 
 JOIN jenis_barang ON join_jenis_barang = id_jenis_barang 
 JOIN opd ON join_opd = id_opd 
-JOIN user ON join_user = id_user
+JOIN pengguna ON join_pengguna = id_pengguna
 WHERE id_barang = $id_barang ")[0];
 
 ?>
@@ -19,7 +28,7 @@ WHERE id_barang = $id_barang ")[0];
     <div class="p-4" id="main-content">
         <div class="card mt-5">
             <div class="card-body">
-                <h1 style="text-align:center">DETAIL DATA BARANG</h1>
+                <h1 style="text-align:center">Detail Data Barang</h1>
                 <table class="table table-striped">
 
                     <tr>
@@ -78,8 +87,8 @@ WHERE id_barang = $id_barang ")[0];
                     </tr>
 
                     <tr>
-                        <td>Nama User</td>
-                        <td>: <?= $barang['nama_user']; ?> </td>
+                        <td>Nama Pengguna</td>
+                        <td>: <?= $barang['nama_pengguna']; ?> </td>
                     </tr>
 
 
@@ -96,8 +105,8 @@ WHERE id_barang = $id_barang ")[0];
 
                 </table>
 
-                <a style="float: right;" class="btn btn-sm btn-warning m-1" href="ubah.php?id_barang=<?= $barang["id_barang"]; ?>" role="button">Ubah</a>
                 <a style="float: right;" class="btn btn-sm btn-danger m-1" href="index.php" role="button">Kembali</a>
+                <a style="float: right;" class="btn btn-sm btn-warning m-1" href="ubah.php?id_barang=<?= $barang["id_barang"]; ?>" role="button">Ubah</a>
 
             </div>
         </div>

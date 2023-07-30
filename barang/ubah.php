@@ -1,4 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+    alert('Masukkan name dan Password');
+    document.location.href ='login.php';
+    </script>";
+    exit;
+}
+
 require "../header.php";
 require "fungsi.php";
 
@@ -37,7 +46,7 @@ if (isset($_POST["submit"])) {
     <div class="form-group col-md-4 offset-4 mb-4">
         <label>Merek Barang</label>
         <div class="input-group">
-            <select id="join_merek_barang" name="join_merek_barang" class="form-select">
+            <select id="join_merek_barang" name="join_merek_barang" style="width:100%" class="select2">
                 <?php
 
                 // agar nilai yang sama bisa muncul dan pilih 
@@ -67,7 +76,7 @@ if (isset($_POST["submit"])) {
     <div class="form-group col-md-4 offset-4 mb-4">
         <label>Jenis Barang</label>
         <div class="input-group">
-            <select id="join_jenis_barang" name="join_jenis_barang" class="form-select">
+            <select id="join_jenis_barang" name="join_jenis_barang" style="width:100%" class="select2">
                 <?php
 
                 // agar nilai yang sama bisa muncul dan pilih 
@@ -102,16 +111,16 @@ if (isset($_POST["submit"])) {
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="status_barang">Status Barang</label>
         <select class="form-select" id="status_barang" name="status_barang" required>
-            <option value="<?= $barang["status_barang"]; ?>"><?= $barang["status_barang"]; ?></option>
-            <option value="Normal">Normal</option>
-            <option value="Rusak">Rusak</option>
+            <?= $status_barang = $barang["status_barang"]; ?>
+            <option value="Normal" <?= $status_barang == 'Normal' ? 'selected' : null ?>>Normal</option>
+            <option value="Rusak" <?= $status_barang == 'Rusak' ? 'selected' : null ?>>Rusak</option>
         </select>
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">
         <label>Nama OPD</label>
         <div class="input-group">
-            <select id="join_opd" name="join_opd" class="form-select">
+            <select id="join_opd" name="join_opd" style="width:100%" class="select2">
                 <?php
 
                 // agar nilai yang sama bisa muncul dan pilih 
@@ -151,36 +160,6 @@ if (isset($_POST["submit"])) {
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="keterangan_barang">Keterangan Barang</label>
         <input type="text" class="form-control" id="keterangan_barang" name="keterangan_barang" value="<?= $barang["keterangan_barang"]; ?>" required>
-    </div>
-
-    <div class="form-group col-md-4 offset-4 mb-4">
-        <label>Nama User</label>
-        <div class="input-group">
-            <select id="join_user" name="join_user" class="form-select">
-                <?php
-
-                // agar nilai yang sama bisa muncul dan pilih 
-                $query = mysqli_query($db, "SELECT join_user,id_barang,nama_user FROM barang JOIN user ON join_user=id_user WHERE id_barang='$id_barang'");
-                if ($query == false) {
-                    die("Terdapat Kesalahan : " . mysqli_error($db));
-                }
-                while ($query2 = mysqli_fetch_assoc($query)) {
-                    echo "<option value='$query2[join_user]'>$query2[nama_user]</option>";
-                }
-
-                // agar nilai yang tidak sama bisa muncul dan pilih 
-                $query3 = mysqli_query($db, "SELECT * FROM user");
-                if ($query3 == false) {
-                    die("Terdapat Kesalahan : " . mysqli_error($db));
-                }
-                while ($query4 = mysqli_fetch_assoc($query3)) {
-                    if ($query4["id_user"] != $barang["join_user"]) {
-                        echo "<option value='$query4[id_user]'>$query4[nama_user]</option>";
-                    }
-                }
-                ?>
-            </select>
-        </div>
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">

@@ -1,4 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+    alert('Masukkan name dan Password');
+    document.location.href ='login.php';
+    </script>";
+    exit;
+}
+
 require "../header.php";
 require "fungsi.php";
 
@@ -40,7 +49,7 @@ if (isset($_POST["submit"])) {
 
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="password_pengguna">password</label>
-        <input type="password" class="form-control" id="password_pengguna" name="password_pengguna" required>
+        <input type="password" class="form-control" id="password_pengguna" name="password_pengguna" required minlength="6">
     </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">
@@ -57,9 +66,9 @@ if (isset($_POST["submit"])) {
         <label for="level_pengguna">Level pengguna</label>
         <select class="form-select" id="level_pengguna" name="level_pengguna" required>
             <?= $level_pengguna = $pengguna["level_pengguna"]; ?>
-            <option value="satu" <?= $level_pengguna == 'satu'?'selected' : null ?>>Admin</option>
-            <option value="dua" <?= $level_pengguna == 'dua'?'selected' : null ?>>Petugas</option>
-            <option value="tiga" <?= $level_pengguna == 'tiga'?'selected' : null ?>>Staff Lapangan</option>
+            <option value="satu" <?= $level_pengguna == 'satu' ? 'selected' : null ?>>Admin</option>
+            <option value="dua" <?= $level_pengguna == 'dua' ? 'selected' : null ?>>Petugas</option>
+            <option value="tiga" <?= $level_pengguna == 'tiga' ? 'selected' : null ?>>Staff Lapangan</option>
         </select>
     </div>
 

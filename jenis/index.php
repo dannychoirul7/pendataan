@@ -1,4 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+    alert('Masukkan name dan Password');
+    document.location.href ='login.php';
+    </script>";
+  exit;
+}
+
 require '../header.php';
 require "fungsi.php";
 $jenis_barang = query("SELECT * FROM jenis_barang ORDER BY id_jenis_barang Asc");

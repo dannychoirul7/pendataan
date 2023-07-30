@@ -1,4 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+    alert('Masukkan name dan Password');
+    document.location.href ='login.php';
+    </script>";
+    exit;
+}
+
 require "../header.php";
 require "fungsi.php";
 // cek apakah tombol submit sudah di tekan atau belum
@@ -34,8 +43,7 @@ if (isset($_POST["submit"])) {
 
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="password_pengguna2">Password Ulang</label>
-        <input type="password" class="form-control" id="password_pengguna2" name="password_pengguna2" required
-        >
+        <input type="password" class="form-control" id="password_pengguna2" name="password_pengguna2" required>
     </div>
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="nama_pengguna">Nama pengguna</label>
@@ -44,7 +52,7 @@ if (isset($_POST["submit"])) {
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="level_pengguna">Level pengguna</label>
         <select class="form-select" id="level_pengguna" name="level_pengguna" required>
-            <option value="">Pilih Level</option>
+            <option value="">---Pilih Level---</option>
             <option value="satu">Admin</option>
             <option value="dua">Petugas</option>
             <option value="tiga">Staff Lapangan</option>

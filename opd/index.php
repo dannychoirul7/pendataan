@@ -1,4 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+    alert('Masukkan name dan Password');
+    document.location.href ='login.php';
+    </script>";
+  exit;
+}
+
 require '../header.php';
 require "fungsi.php";
 $opd = query("SELECT * FROM opd ORDER BY id_opd Asc");

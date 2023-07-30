@@ -1,11 +1,22 @@
 <?php
+
+session_start();
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+  alert('Masukkan name dan Password');
+  document.location.href ='login.php';
+  </script>";
+  exit;
+}
+
+
 require '../header.php';
 require "fungsi.php";
 $barang = query("SELECT * FROM barang 
 JOIN merek_barang ON join_merek_barang = id_merek_barang 
 JOIN jenis_barang ON join_jenis_barang = id_jenis_barang 
 JOIN opd ON join_opd = id_opd 
-JOIN user ON join_user = id_user
+JOIN pengguna ON join_pengguna = id_pengguna
 ORDER BY id_barang DESC");
 ?>
 
@@ -19,7 +30,7 @@ ORDER BY id_barang DESC");
     </button>
     <div class="card mt-5">
       <div class="card-body">
-        <h1 style="text-align:center">DATA BARANG</h1>
+        <h1 style="text-align:center">Data Barang</h1>
         <table class="table table-striped" id="datatable">
           <thead>
             <tr style="text-align:center">
@@ -30,7 +41,7 @@ ORDER BY id_barang DESC");
               <th style="text-align:center">Nama Opd</th>
               <th style="text-align:center">Alamat Opd</th>
               <th style="text-align:center">Status Barang</th>
-              <th style="text-align:center">Nama User</th>
+              <th style="text-align:center">Nama pengguna</th>
               <th width="15%" style="text-align:center">
                 <a class="btn btn-sm btn-primary" href="tambah.php" role="button">tambah data</a>
               </th>
@@ -47,7 +58,7 @@ ORDER BY id_barang DESC");
                 <td style="text-align: center;"><?= $row["nama_opd"]; ?></td>
                 <td style="text-align: center;"><?= $row["alamat_opd"]; ?></td>
                 <td style="text-align: center;"><?= $row["status_barang"]; ?></td>
-                <td style="text-align: center;"><?= $row["nama_user"]; ?></td>
+                <td style="text-align: center;"><?= $row["nama_pengguna"]; ?></td>
                 <td style="text-align: center">
                   <a class="btn btn-sm btn-dark" href="detail.php?id_barang=<?= $row["id_barang"]; ?>" role="button">Detail</a>
                   <a class="btn btn-sm btn-warning" href="ubah.php?id_barang=<?= $row["id_barang"]; ?>" role="button">Ubah</a>

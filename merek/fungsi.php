@@ -1,4 +1,6 @@
 <?php
+
+
 require "../koneksi.php";
 
 function tambah($data)

@@ -1,4 +1,5 @@
 <?php
+
 require "../koneksi.php";
 
 function tambah($data)
@@ -6,7 +7,7 @@ function tambah($data)
     global $db;
     // ambil data daritiap elemen dalam form
     $nama_jenis_barang = htmlspecialchars($data["nama_jenis_barang"]);
-    
+
 
     // query insert data
     $query = "INSERT INTO jenis_barang(nama_jenis_barang)
@@ -30,7 +31,7 @@ function ubah($data)
     // ambil data daritiap elemen dalam form
     $id_jenis_barang = $data["id_jenis_barang"];
     $nama_jenis_barang = htmlspecialchars($data["nama_jenis_barang"]);
-    
+
 
 
     // query update data

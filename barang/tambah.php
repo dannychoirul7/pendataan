@@ -1,11 +1,20 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+    alert('Masukkan name dan Password');
+    document.location.href ='login.php';
+    </script>";
+    exit;
+}
+
 require "../header.php";
 require "fungsi.php";
 // cek apakah tombol submit sudah di tekan atau belum
 if (isset($_POST["submit"])) {
     var_dump($_POST);
     print_r($_FILES);
-    // die;
+
     // data berhasil di tambahkan atau tidak
     if (tambah($_POST) > 0) {
         echo "<script>
@@ -28,7 +37,7 @@ if (isset($_POST["submit"])) {
     <div class="form-group col-md-4 offset-4 mb-4">
         <label>Merek Barang</label>
         <div class="input-group">
-            <select class="form-select" name="join_merek_barang" id="join_merek_barang" required>
+            <select style="width:100%" class="select2" name="join_merek_barang" id="join_merek_barang" required>
                 <option value=""></option>
                 <?php
 
@@ -47,7 +56,7 @@ if (isset($_POST["submit"])) {
     <div class="form-group col-md-4 offset-4 mb-4">
         <label>Jenis Barang</label>
         <div class="input-group">
-            <select class="form-select" name="join_jenis_barang" id="join_jenis_barang" required>
+            <select style="width:100%" class="select2" name="join_jenis_barang" id="join_jenis_barang" required>
                 <option value=""></option>
                 <?php
 
@@ -71,7 +80,7 @@ if (isset($_POST["submit"])) {
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="status_barang">Status Barang</label>
         <select class="form-select" id="status_barang" name="status_barang" required>
-            <option value=""></option>
+            <option value="">---Pilih Status---</option>
             <option value="Normal">Normal</option>
             <option value="Rusak">Rusak</option>
         </select>
@@ -80,7 +89,7 @@ if (isset($_POST["submit"])) {
     <div class="form-group col-md-4 offset-4 mb-4">
         <label>Nama OPD</label>
         <div class="input-group">
-            <select class="form-select" name="join_opd" id="join_opd" required>
+            <select style="width:100%" class="select2" name="join_opd" id="join_opd" required>
                 <option value=""></option>
                 <?php
 
@@ -111,24 +120,7 @@ if (isset($_POST["submit"])) {
         <input type="text" class="form-control" id="keterangan_barang" name="keterangan_barang" required>
     </div>
 
-    <div class="form-group col-md-4 offset-4 mb-4">
-        <label>Nama User</label>
-        <div class="input-group">
-            <select class="form-select" name="join_user" id="join_user" required>
-                <option value=""></option>
-                <?php
 
-                $query = mysqli_query($db, "SELECT * FROM user");
-                if ($query == false) {
-                    die("Terdapat Kesalahan : " . mysqli_error($db));
-                }
-                while ($query2 = mysqli_fetch_assoc($query)) {
-                    echo "<option value='$query2[id_user]'>$query2[nama_user]</option>";
-                }
-                ?>
-            </select>
-        </div>
-    </div>
 
     <div class="form-group col-md-4 offset-4 mb-4">
         <label for="gambar_barang">Gambar Pedukung</label>

@@ -1,4 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+    alert('Masukkan name dan Password');
+    document.location.href ='login.php';
+    </script>";
+  exit;
+}
+
 require '../header.php';
 require "../koneksi.php";
 $catatan = query("SELECT * FROM catatan 
@@ -15,7 +24,7 @@ ORDER BY id_catatan DESC");
     </button>
     <div class="card mt-5">
       <div class="card-body">
-        <h1 style="text-align:center">DATA CATATAN</h1>
+        <h1 style="text-align:center">Data Catatan</h1>
         <table class="table table-striped" id="datatable">
           <thead>
             <tr style="text-align:center">
@@ -30,7 +39,7 @@ ORDER BY id_catatan DESC");
               <th style="text-align:center">keterangan_barang</th>
               <th style="text-align:center">tanggal_masuk_barang</th>
               <th style="text-align:center">tanggal_update_barang</th>
-              <th style="text-align:center">user</th>
+              <th style="text-align:center">pengguna</th>
               <th style="text-align:center">gambar_barang</th>
               <th style="text-align:center">keterangan_catatan</th>
             </tr>
@@ -50,7 +59,7 @@ ORDER BY id_catatan DESC");
                 <td style="text-align: center;"><?= $row["keterangan_barang_catatan"]; ?></td>
                 <td style="text-align: center;"><?= $row["tanggal_masuk_barang_catatan"]; ?></td>
                 <td style="text-align: center;"><?= $row["tanggal_update_barang_catatan"]; ?></td>
-                <td style="text-align: center;"><?= $row["join_user_catatan"]; ?></td>
+                <td style="text-align: center;"><?= $row["join_pengguna_catatan"]; ?></td>
                 <td style="text-align: center;"><?= $row["gambar_barang_catatan"]; ?></td>
                 <td style="text-align: center;"><?= $row["keterangan_catatan"]; ?></td>
               </tr>
