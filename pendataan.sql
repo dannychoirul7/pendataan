@@ -11,7 +11,7 @@
  Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 27/07/2023 21:33:44
+ Date: 31/07/2023 19:44:46
 */
 
 SET NAMES utf8mb4;
@@ -33,10 +33,10 @@ CREATE TABLE `barang`  (
   `keterangan_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tanggal_masuk_barang` timestamp NULL DEFAULT current_timestamp,
   `tanggal_update_barang` timestamp NULL DEFAULT current_timestamp,
-  `join_user` int NOT NULL,
+  `join_pengguna` int NOT NULL,
   `gambar_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_barang`) USING BTREE,
-  INDEX `nama`(`join_user`) USING BTREE,
+  INDEX `nama`(`join_pengguna`) USING BTREE,
   INDEX `jenis_barang`(`join_jenis_barang`) USING BTREE,
   INDEX `merek_barang`(`join_merek_barang`) USING BTREE,
   INDEX `opd`(`join_opd`) USING BTREE,
@@ -44,8 +44,8 @@ CREATE TABLE `barang`  (
   CONSTRAINT `jenis_barang` FOREIGN KEY (`join_jenis_barang`) REFERENCES `jenis_barang` (`id_jenis_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `merek_barang` FOREIGN KEY (`join_merek_barang`) REFERENCES `merek_barang` (`id_merek_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `opd` FOREIGN KEY (`join_opd`) REFERENCES `opd` (`id_opd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `user` FOREIGN KEY (`join_user`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+  CONSTRAINT `pengguna` FOREIGN KEY (`join_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of barang
@@ -68,12 +68,12 @@ CREATE TABLE `catatan`  (
   `keterangan_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tanggal_masuk_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tanggal_update_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `join_user_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `join_pengguna_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `gambar_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `keterangan_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_catatan`) USING BTREE,
   INDEX `tanggal_update`(`id_barang_catatan`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of catatan
@@ -90,6 +90,24 @@ INSERT INTO `catatan` VALUES (12, 30, '6', '5', 's', 'Normal', '6', '55555', '11
 INSERT INTO `catatan` VALUES (13, 30, '6', '5', 's', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'd', '2023-07-25 20:02:15', '2023-07-25 20:31:29', '1', '64bfceb199b07.png', 'data berubah');
 INSERT INTO `catatan` VALUES (14, 30, '6', '5', 's', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'd', '2023-07-25 20:02:15', '2023-07-25 20:32:44', '1', '64bfcefc3bac8.png', 'data berubah');
 INSERT INTO `catatan` VALUES (15, 30, '6', '5', 's', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'd', '2023-07-25 20:02:15', '2023-07-25 20:32:44', '1', '64bfcefc3bac8.png', 'data di hapus');
+INSERT INTO `catatan` VALUES (16, 35, '1', '9', 'rr', 'e', '5', 'e', 'e', 'e', '2023-07-28 20:31:11', '2023-07-28 20:31:11', '7', 'ee', 'data masuk');
+INSERT INTO `catatan` VALUES (17, 35, '5', '9', 'rr', 'Normal', '5', 'e', 'e', 'e', '2023-07-28 20:31:11', '2023-07-28 20:32:29', '7', 'ee', 'data berubah');
+INSERT INTO `catatan` VALUES (18, 35, '5', '9', 'rr', 'Normal', '5', 'e', 'e', 'e', '2023-07-28 20:31:11', '2023-07-28 20:32:29', '7', 'ee', 'data di hapus');
+INSERT INTO `catatan` VALUES (19, 36, '1', '6', 'q', 'q', '6', 'q', 'q', 'q', '2023-07-28 20:34:30', '2023-07-28 20:34:30', '7', 'q', 'data masuk');
+INSERT INTO `catatan` VALUES (20, 36, '1', '6', 'q', 'Normal', '6', 'q', 'q', 'q', '2023-07-28 20:34:30', '2023-07-28 20:34:45', '7', '64c3c3f5977cf.png', 'data berubah');
+INSERT INTO `catatan` VALUES (21, 45, '1', '9', 'qqq43', 'Normal', '6', '2121', 'sa', ' sau', '2023-07-28 21:18:23', '2023-07-28 21:18:23', '7', '64c3ce2f95a5e.png', 'data di masuk');
+INSERT INTO `catatan` VALUES (22, 46, '1', '9', 's', 'Normal', '6', 's', '12345', 'satuw', '2023-07-28 21:28:01', '2023-07-28 21:28:01', '7', '64c3d0718fba5.png', 'data di masuk');
+INSERT INTO `catatan` VALUES (23, 36, '1', '6', 'q', 'Normal', '6', 'q', 'q', 'q', '2023-07-28 20:34:30', '2023-07-28 20:34:45', '7', '64c3c3f5977cf.png', 'data di hapus');
+INSERT INTO `catatan` VALUES (24, 47, '4', '2', 'qqq43', 'Normal', '6', 'dda', 's', ' sau', '2023-07-28 23:29:56', '2023-07-28 23:29:56', '7', '64c3ed04cbc75.png', 'data di masuk');
+INSERT INTO `catatan` VALUES (25, 44, '1', '2', 'qqq43', 'Normal', '6', 'erfs', '1111111111111111111111111111111111111111111111111111111', 'satu', '2023-07-28 21:09:15', '2023-07-28 21:09:29', '7', '64c3cc194e67e.png', 'data di hapus');
+INSERT INTO `catatan` VALUES (26, 45, '1', '9', 'qqq43', 'Normal', '6', '2121', 'sa', ' sau', '2023-07-28 21:18:23', '2023-07-28 21:18:23', '7', '64c3ce2f95a5e.png', 'data di hapus');
+INSERT INTO `catatan` VALUES (27, 46, '1', '9', 's', 'Normal', '6', 's', '12345', 'satuw', '2023-07-28 21:28:01', '2023-07-28 21:28:01', '7', '64c3d0718fba5.png', 'data di hapus');
+INSERT INTO `catatan` VALUES (28, 47, '4', '2', 'qqq43', 'Normal', '6', 'dda', 's', ' sau', '2023-07-28 23:29:56', '2023-07-28 23:32:49', '8', '64c3edb15a99d.png', 'data di ubah');
+INSERT INTO `catatan` VALUES (29, 48, '4', '5', 'BARU', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'satu', '2023-07-29 21:12:03', '2023-07-29 21:12:03', '7', '64c51e33d77d2.png', 'data di masuk');
+INSERT INTO `catatan` VALUES (30, 48, '9', '5', 'BARU', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'satu', '2023-07-29 21:12:03', '2023-07-29 21:12:31', '7', '64c51e33d77d2.png', 'data di ubah');
+INSERT INTO `catatan` VALUES (31, 47, '4', '2', 'qqq43', 'Normal', '6', 'dda', 's', ' sau', '2023-07-28 23:29:56', '2023-07-29 21:26:14', '7', '64c3edb15a99d.png', 'data di ubah');
+INSERT INTO `catatan` VALUES (32, 48, '9', '5', 'BARU', 'Normal', '6', '55555', '1111111111111111111111111111111111111111111111111111111', 'satu', '2023-07-29 21:12:03', '2023-07-29 21:12:31', '7', '64c51e33d77d2.png', 'data di hapus');
+INSERT INTO `catatan` VALUES (33, 47, '4', '2', 'qqq43', 'Normal', '6', 'dda', 's', ' sau', '2023-07-28 23:29:56', '2023-07-29 21:26:14', '7', '64c3edb15a99d.png', 'data di hapus');
 
 -- ----------------------------
 -- Table structure for gambar
@@ -115,22 +133,11 @@ CREATE TABLE `jenis_barang`  (
   `nama_jenis_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_jenis_barang`) USING BTREE,
   INDEX `nama_jenis_barang`(`nama_jenis_barang`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of jenis_barang
 -- ----------------------------
-INSERT INTO `jenis_barang` VALUES (9, 'delapan');
-INSERT INTO `jenis_barang` VALUES (2, 'dua');
-INSERT INTO `jenis_barang` VALUES (5, 'empat');
-INSERT INTO `jenis_barang` VALUES (7, 'enam');
-INSERT INTO `jenis_barang` VALUES (6, 'lima');
-INSERT INTO `jenis_barang` VALUES (1, 'satu');
-INSERT INTO `jenis_barang` VALUES (12, 'sebelas');
-INSERT INTO `jenis_barang` VALUES (10, 'sembilan');
-INSERT INTO `jenis_barang` VALUES (11, 'sepuluh');
-INSERT INTO `jenis_barang` VALUES (3, 'tiga');
-INSERT INTO `jenis_barang` VALUES (8, 'tujuh');
 
 -- ----------------------------
 -- Table structure for merek_barang
@@ -141,16 +148,11 @@ CREATE TABLE `merek_barang`  (
   `nama_merek_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_merek_barang`) USING BTREE,
   INDEX `nama_merek_barang`(`nama_merek_barang`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of merek_barang
 -- ----------------------------
-INSERT INTO `merek_barang` VALUES (1, 'merek1');
-INSERT INTO `merek_barang` VALUES (4, 'merek2');
-INSERT INTO `merek_barang` VALUES (5, 'merek3');
-INSERT INTO `merek_barang` VALUES (6, 'merek4');
-INSERT INTO `merek_barang` VALUES (7, 'merek5');
 
 -- ----------------------------
 -- Table structure for opd
@@ -169,9 +171,6 @@ CREATE TABLE `opd`  (
 -- ----------------------------
 -- Records of opd
 -- ----------------------------
-INSERT INTO `opd` VALUES (6, 'mjkt', 'mojokerto');
-INSERT INTO `opd` VALUES (5, 'sby', 'surabaya');
-INSERT INTO `opd` VALUES (7, 'surabaya', 'adoh');
 
 -- ----------------------------
 -- Table structure for pengguna
@@ -185,80 +184,80 @@ CREATE TABLE `pengguna`  (
   `level_pengguna` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_pengguna`) USING BTREE,
   INDEX `nama_user`(`nama_pengguna`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pengguna
 -- ----------------------------
-INSERT INTO `pengguna` VALUES (3, '', '2', '2', 'satu');
-INSERT INTO `pengguna` VALUES (4, '', '6', '7', 'dua');
-INSERT INTO `pengguna` VALUES (6, 'uwu', '$2y$10$5aWrjMpc5M4gIXyzc8vNEOXI9hTxIEP/y2nBwuKvX4MxqJShDjWMu', 'uwu', 'tiga');
+INSERT INTO `pengguna` VALUES (1, 'DannyC', '$2y$10$q9e7ZYky4hd33.QbGXd7De3mr.RegnBVAhvtYCicN3K96yJO.nvl2', 'Danny Choirul', 'nol');
+INSERT INTO `pengguna` VALUES (2, 'administrator', '$2y$10$nnD5XpR4eTWu98nHcOAOlefEFMYR0oh7DBF4ryo.SsVVOvibRD0va', 'admin', 'satu');
+INSERT INTO `pengguna` VALUES (3, 'petugas', '$2y$10$YqSd9tk4nDDr.eIHyaYABespaEB5Gtylzl4OwLkS7oCEEqL55XCNe', 'petugas', 'dua');
 
 -- ----------------------------
 -- Triggers structure for table barang
 -- ----------------------------
-DROP TRIGGER IF EXISTS `catatan_masuk_data`;
+DROP TRIGGER IF EXISTS `catatan_masuk_barang`;
 delimiter ;;
-CREATE TRIGGER `catatan_masuk_data` AFTER INSERT ON `barang` FOR EACH ROW INSERT INTO catatan SET 
-id_barang_catatan = new.id_barang, 
-join_merek_barang_catatan = new.join_merek_barang, 
-join_jenis_barang_catatan = new.join_jenis_barang, 
-nomor_serial_barang_catatan = new.nomor_serial_barang, 
-status_barang_catatan = new.status_barang, 
-join_opd_catatan = new.join_opd, 
-detail_lokasi_barang_catatan = new.detail_lokasi_barang, 
-koordinat_barang_catatan = new.koordinat_barang, 
-keterangan_barang_catatan = new.keterangan_barang, 
-tanggal_masuk_barang_catatan = new.tanggal_masuk_barang, 
-tanggal_update_barang_catatan = new.tanggal_update_barang, 
-join_user_catatan = new.join_user, 
-gambar_barang_catatan = new.gambar_barang, 
-keterangan_catatan = 'data masuk'
+CREATE TRIGGER `catatan_masuk_barang` AFTER INSERT ON `barang` FOR EACH ROW INSERT INTO catatan SET
+id_barang_catatan = new.id_barang,
+join_merek_barang_catatan = new.join_merek_barang,
+join_jenis_barang_catatan = new.join_jenis_barang,
+nomor_serial_barang_catatan = new.nomor_serial_barang,
+status_barang_catatan = new.status_barang,
+join_opd_catatan = new.join_opd,
+detail_lokasi_barang_catatan = new.detail_lokasi_barang,
+koordinat_barang_catatan = new.koordinat_barang,
+keterangan_barang_catatan = new.keterangan_barang,
+tanggal_masuk_barang_catatan = new.tanggal_masuk_barang,
+tanggal_update_barang_catatan = new.tanggal_update_barang,
+join_pengguna_catatan = new.join_pengguna,
+gambar_barang_catatan = new.gambar_barang,
+keterangan_catatan = 'data di masuk'
 ;;
 delimiter ;
 
 -- ----------------------------
 -- Triggers structure for table barang
 -- ----------------------------
-DROP TRIGGER IF EXISTS `catatan_ubah_data`;
+DROP TRIGGER IF EXISTS `catatan_edit_barang`;
 delimiter ;;
-CREATE TRIGGER `catatan_ubah_data` AFTER UPDATE ON `barang` FOR EACH ROW INSERT INTO catatan SET 
-id_barang_catatan = new.id_barang, 
-join_merek_barang_catatan = new.join_merek_barang, 
-join_jenis_barang_catatan = new.join_jenis_barang, 
-nomor_serial_barang_catatan = new.nomor_serial_barang, 
-status_barang_catatan = new.status_barang, 
-join_opd_catatan = new.join_opd, 
-detail_lokasi_barang_catatan = new.detail_lokasi_barang, 
-koordinat_barang_catatan = new.koordinat_barang, 
-keterangan_barang_catatan = new.keterangan_barang, 
-tanggal_masuk_barang_catatan = new.tanggal_masuk_barang, 
-tanggal_update_barang_catatan = new.tanggal_update_barang, 
-join_user_catatan = new.join_user, 
-gambar_barang_catatan = new.gambar_barang, 
-keterangan_catatan = 'data berubah'
+CREATE TRIGGER `catatan_edit_barang` AFTER UPDATE ON `barang` FOR EACH ROW INSERT INTO catatan SET
+id_barang_catatan = new.id_barang,
+join_merek_barang_catatan = new.join_merek_barang,
+join_jenis_barang_catatan = new.join_jenis_barang,
+nomor_serial_barang_catatan = new.nomor_serial_barang,
+status_barang_catatan = new.status_barang,
+join_opd_catatan = new.join_opd,
+detail_lokasi_barang_catatan = new.detail_lokasi_barang,
+koordinat_barang_catatan = new.koordinat_barang,
+keterangan_barang_catatan = new.keterangan_barang,
+tanggal_masuk_barang_catatan = new.tanggal_masuk_barang,
+tanggal_update_barang_catatan = new.tanggal_update_barang,
+join_pengguna_catatan = new.join_pengguna,
+gambar_barang_catatan = new.gambar_barang,
+keterangan_catatan = 'data di ubah'
 ;;
 delimiter ;
 
 -- ----------------------------
 -- Triggers structure for table barang
 -- ----------------------------
-DROP TRIGGER IF EXISTS `catatan_hapus_data`;
+DROP TRIGGER IF EXISTS `catatan_hapus_barang`;
 delimiter ;;
-CREATE TRIGGER `catatan_hapus_data` AFTER DELETE ON `barang` FOR EACH ROW INSERT INTO catatan SET 
-id_barang_catatan = old.id_barang, 
-join_merek_barang_catatan = old.join_merek_barang, 
-join_jenis_barang_catatan = old.join_jenis_barang, 
-nomor_serial_barang_catatan = old.nomor_serial_barang, 
-status_barang_catatan = old.status_barang, 
-join_opd_catatan = old.join_opd, 
-detail_lokasi_barang_catatan = old.detail_lokasi_barang, 
-koordinat_barang_catatan = old.koordinat_barang, 
-keterangan_barang_catatan = old.keterangan_barang, 
-tanggal_masuk_barang_catatan = old.tanggal_masuk_barang, 
-tanggal_update_barang_catatan = old.tanggal_update_barang, 
-join_user_catatan = old.join_user, 
-gambar_barang_catatan = old.gambar_barang, 
+CREATE TRIGGER `catatan_hapus_barang` AFTER DELETE ON `barang` FOR EACH ROW INSERT INTO catatan SET
+id_barang_catatan = old.id_barang,
+join_merek_barang_catatan = old.join_merek_barang,
+join_jenis_barang_catatan = old.join_jenis_barang,
+nomor_serial_barang_catatan = old.nomor_serial_barang,
+status_barang_catatan = old.status_barang,
+join_opd_catatan = old.join_opd,
+detail_lokasi_barang_catatan = old.detail_lokasi_barang,
+koordinat_barang_catatan = old.koordinat_barang,
+keterangan_barang_catatan = old.keterangan_barang,
+tanggal_masuk_barang_catatan = old.tanggal_masuk_barang,
+tanggal_update_barang_catatan = old.tanggal_update_barang,
+join_pengguna_catatan = old.join_pengguna,
+gambar_barang_catatan = old.gambar_barang,
 keterangan_catatan = 'data di hapus'
 ;;
 delimiter ;
