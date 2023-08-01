@@ -1,10 +1,12 @@
 <?php
+
 require "../koneksi.php";
 
 function tambah($data)
 {
     global $db;
     // ambil data daritiap elemen dalam form
+    $id_barang = md5(time() . mt_rand(1, 1000000));
     $join_merek_barang = htmlspecialchars($data["join_merek_barang"]);
     $join_jenis_barang = htmlspecialchars($data["join_jenis_barang"]);
     $nomor_serial_barang = htmlspecialchars($data["nomor_serial_barang"]);
@@ -15,7 +17,7 @@ function tambah($data)
     $keterangan_barang = htmlspecialchars($data["keterangan_barang"]);
     $tanggal_masuk_barang = date('Y-m-d H:i:s');
     $tanggal_update_barang = date('Y-m-d H:i:s');
-    $join_user = htmlspecialchars($data["join_user"]);
+    $join_pengguna = $_SESSION['id_pengguna'];
     $gambar_barang = upload();
     if (!$gambar_barang) {
         return false;
@@ -23,6 +25,7 @@ function tambah($data)
 
     // query insert data
     $query = "INSERT INTO barang(
+        id_barang,
         join_merek_barang,
         join_jenis_barang,
         nomor_serial_barang,
@@ -33,9 +36,10 @@ function tambah($data)
         keterangan_barang,
         tanggal_masuk_barang,
         tanggal_update_barang,
-        join_user,
+        join_pengguna,
         gambar_barang)
     VALUES (
+    '$id_barang',
     '$join_merek_barang',
     '$join_jenis_barang',
     '$nomor_serial_barang',
@@ -46,7 +50,7 @@ function tambah($data)
     '$keterangan_barang',
     '$tanggal_masuk_barang',
     '$tanggal_update_barang',
-    '$join_user',
+    '$join_pengguna',
     '$gambar_barang')";
     mysqli_query($db, $query);
 
@@ -57,11 +61,11 @@ function hapus($id_barang)
 {
     global $db;
 
-    $queryunlink =  mysqli_fetch_array(mysqli_query($db, "SELECT * FROM barang WHERE id_barang = $id_barang"));
+    $queryunlink =  mysqli_fetch_array(mysqli_query($db, "SELECT * FROM barang WHERE id_barang = '$id_barang'"));
     $filename = $queryunlink["gambar_barang"];
     unlink('../gambar/' . $filename);
 
-    mysqli_query($db, "DELETE FROM barang WHERE id_barang = $id_barang");
+    mysqli_query($db, "DELETE FROM barang WHERE id_barang = '$id_barang'");
     return mysqli_affected_rows($db);
 }
 
@@ -79,7 +83,7 @@ function ubah($data)
     $koordinat_barang = htmlspecialchars($data["koordinat_barang"]);
     $keterangan_barang = htmlspecialchars($data["keterangan_barang"]);
     $tanggal_update_barang = date('Y-m-d H:i:s');
-    $join_user = htmlspecialchars($data["join_user"]);
+    $join_pengguna = $_SESSION['id_pengguna'];
     $gambar_barang_lama = htmlspecialchars($data["gambar_barang_lama"]);
 
     if ($_FILES['gambar_barang']['error'] === 4) {
@@ -91,7 +95,7 @@ function ubah($data)
         }
 
         // hapus gambar pada direktori
-        $queryunlink =  mysqli_fetch_array(mysqli_query($db, "SELECT * FROM barang WHERE id_barang = $id_barang"));
+        $queryunlink =  mysqli_fetch_array(mysqli_query($db, "SELECT * FROM barang WHERE id_barang = '$id_barang'"));
         $filename = $queryunlink["gambar_barang"];
         unlink('../gambar/' . $filename);
     }
@@ -107,9 +111,9 @@ function ubah($data)
             koordinat_barang ='$koordinat_barang',
             keterangan_barang ='$keterangan_barang',
             tanggal_update_barang = '$tanggal_update_barang',
-            join_user ='$join_user',
+            join_pengguna ='$join_pengguna',
             gambar_barang ='$gambar_barang'
-            WHERE id_barang = $id_barang     
+            WHERE id_barang = '$id_barang'     
         ";
     mysqli_query($db, $query);
 

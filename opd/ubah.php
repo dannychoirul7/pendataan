@@ -1,4 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION["login"])) {
+    echo "<script>
+    alert('Masukkan name dan Password');
+    document.location.href ='login.php';
+    </script>";
+    exit;
+}
+
 require "../header.php";
 require "fungsi.php";
 
@@ -6,7 +15,7 @@ require "fungsi.php";
 $id_opd = $_GET["id_opd"];
 
 // query data mahasiswa berdasarkan id
-$opd = query("SELECT * FROM opd WHERE id_opd = $id_opd ")[0];
+$opd = query("SELECT * FROM opd WHERE id_opd = '$id_opd'")[0];
 
 // cek apakah tombol submit sudah di tekan atau belum
 if (isset($_POST["submit"])) {
