@@ -25,13 +25,30 @@
 
             $tanggal = mktime(date('m'), date("d"), date('Y'));
             date_default_timezone_set("Asia/Jakarta");
+<<<<<<< HEAD
 
+=======
+            $a = date("H");
+            if (($a >= 6) && ($a <= 11)) {
+              echo "Selamat Pagi <b>$nama</b>";
+            } else if (($a >= 11) && ($a <= 15)) {
+              echo "Selamat Siang <b>$nama</b>";
+            } else if (($a > 15) && ($a <= 18)) {
+              echo "Selamat Sore <b>$nama</b>";
+            } else {
+              echo "Selamat Malam <b>$nama</b>";
+            }
+>>>>>>> 3b0f3b552bef42f9b75721008cd33290df2bc2e2
             ?>
           </ul>
 
 
           <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+<<<<<<< HEAD
             <i class="fa-solid fa-user fa-lg"></i> &nbsp; <strong><?= $_SESSION["nama_pengguna"] ?></strong>
+=======
+            <i class="fa-solid fa-user fa-lg"></i>
+>>>>>>> 3b0f3b552bef42f9b75721008cd33290df2bc2e2
           </button>
 
           <div>
