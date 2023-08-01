@@ -62,23 +62,16 @@
         Catatan
       </a>
     </li>
-    <li>
-      <a class="text-white" href=".../pengguna/index.php">
-        Daftar Pengguna
-      </a>
-    </li>
-    <li class="border-top my-3"></li>
 
-    <button class="btn btn-toggle border-0 collapsed text-white" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-      Account
-    </button>
-    <div class="collapse" id="account-collapse">
-      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-        <li><a href="#" class="text-white">New...</a></li>
-        <li><a href="#" class="text-white">Profile</a></li>
-        <li><a href="#" class="text-white">Settings</a></li>
-        <li><a href="#" class="text-white">Sign out</a></li>
-      </ul>
-    </div>
+    <?php
+    if ($_SESSION['level_pengguna'] == 'nol' or $_SESSION['level_pengguna'] == 'satu') : ?>
+      <li>
+        <a class="text-white" href="../pengguna/index.php">
+          Daftar Pengguna
+        </a>
+      </li>
+    <?php endif;
+    ?>
+
   </div>
 </div>

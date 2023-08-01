@@ -1,12 +1,13 @@
 <?php
-// session_start();
-// if (!isset($_SESSION["login"])) {
-//   echo "<script>
-//   alert('Masukkan name dan Password');
-//   document.location.href ='login.php';
-//   </script>";
-//   exit;
-// }
+session_start();
+if (!isset($_SESSION["login"])) {
+  echo "<script>
+  alert('Masukkan name dan Password');
+  document.location.href ='login.php';
+  </script>";
+  exit;
+}
+
 ?>
 <!-- header.php -->
 <!DOCTYPE html>
@@ -24,44 +25,116 @@
       <nav class="navbar navbar-dark bg-primary">
         <div class="container-fluid">
           <a class="navbar-brand" href="index.php">Manajemen Aset</a>
+
+          <ul class="me-auto mb-sm-0 offset-3 text-white">
+            <div id="jam"></div>
+            <?php
+            $nama = $_SESSION["nama_pengguna"];
+
+            $tanggal = mktime(date('m'), date("d"), date('Y'));
+            date_default_timezone_set("Asia/Jakarta");
+            ?>
+          </ul>
+
+
+          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+            <i class="fa-solid fa-user fa-lg"></i>&nbsp; <strong><?= $_SESSION["nama_pengguna"] ?></strong>
+          </button>
+
+          <div>
+            <div class="collapse collapse-vertical" id="collapseWidthExample">
+              <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profil">Profil</a>
+              <a href="logout.php" class="btn btn-primary">Logout</a>
+            </div>
+          </div>
+
+
         </div>
       </nav>
     </div>
+
   </header>
+  <!-- modal -->
+  <div id="profil" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detail Pengguna</h5>
+        </div>
+        <div class="modal-body">
+
+          <table class="table table-striped">
+
+            <tr>
+              <td>Username</td>
+              <td>: <?= $_SESSION["username_pengguna"] ?> </td>
+            </tr>
+
+            <tr>
+              <td>Nama</td>
+              <td>: <?= $_SESSION["nama_pengguna"] ?> </td>
+            </tr>
+
+            <tr>
+              <td>Level </td>
+              <td>: <?php
+                    if ($_SESSION["level_pengguna"] == "nol") {
+                      echo "Unknown";
+                    }
+                    if ($_SESSION["level_pengguna"] == "satu") {
+                      echo "Administrator";
+                    }
+                    if ($_SESSION["level_pengguna"] == "dua") {
+                      echo "Petugas";
+                    }
+                    if ($_SESSION["level_pengguna"] == "tiga") {
+                      echo "Staff Lapangan";
+                    }  ?>
+              </td>
+            </tr>
+          </table>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal -->
+  <style>
+    li {
+      list-style: none;
+      margin: 20px 0 20px 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      position: fixed;
+      margin-left: -300px;
+      transition: 0.4s;
+    }
+
+    .active-main-content {
+      margin-left: 250px;
+    }
+
+    .active-sidebar {
+      margin-left: 0;
+    }
+
+    #main-content {
+      transition: 0.4s;
+    }
+  </style>
 
   <body>
-    <style>
-      li {
-        list-style: none;
-        margin: 20px 0 20px 0;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      .sidebar {
-        width: 250px;
-        height: 100vh;
-        position: fixed;
-        margin-left: -300px;
-        transition: 0.4s;
-      }
-
-      .active-main-content {
-        margin-left: 250px;
-      }
-
-      .active-sidebar {
-        margin-left: 0;
-      }
-
-      #main-content {
-        transition: 0.4s;
-      }
-    </style>
-
-
     <div>
       <div class="sidebar p-4 bg-primary" id="sidebar">
         <li>
@@ -94,24 +167,18 @@
             Catatan
           </a>
         </li>
-        <li>
-          <a class="text-white" href="pengguna/index.php">
-            Daftar Pengguna
-          </a>
-        </li>
-        <li class="border-top my-3"></li>
 
-        <button class="btn btn-toggle border-0 collapsed text-white" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-          Account
-        </button>
-        <div class="collapse" id="account-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="text-white">New...</a></li>
-            <li><a href="#" class="text-white">Profile</a></li>
-            <li><a href="#" class="text-white">Settings</a></li>
-            <li><a href="#" class="text-white">Sign out</a></li>
-          </ul>
-        </div>
+
+        <?php
+        if ($_SESSION['level_pengguna'] == 'nol' or $_SESSION['level_pengguna'] == 'satu') : ?>
+          <li>
+            <a class="text-white" href="pengguna/index.php">
+              Daftar Pengguna
+            </a>
+          </li>
+        <?php endif;
+        ?>
+
       </div>
     </div>
     <div class="p-4" id="main-content">
@@ -121,80 +188,108 @@
       <div class="card mt-5">
         <div class="card-body">
 
-          <!-- Small boxes (Stat box) -->
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-info">
-                  <div class="inner">
-                    <h3>150</h3>
-
-                    <p>New Orders</p>
-                  </div>
-                  <div class="icon">
-                    <i class="ion ion-bag"></i>
-                  </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <div class="row">
+            <div class="col-sm-3 mb-3 mb-sm-0">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
-              <!-- ./col -->
-              <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-success">
-                  <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                    <p>Bounce Rate</p>
-                  </div>
-                  <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
-                  </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+            <div class="col-sm-3">
+              <div class="card text-bg-primary">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
-              <!-- ./col -->
-              <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-warning">
-                  <div class="inner">
-                    <h3>44</h3>
-
-                    <p>pengguna Registrations</p>
-                  </div>
-                  <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                  </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+            <div class="col-sm-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
-              <!-- ./col -->
-              <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-danger">
-                  <div class="inner">
-                    <h3>65</h3>
-
-                    <p>Unique Visitors</p>
-                  </div>
-                  <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
-                  </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+            <div class="col-sm-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
-              <!-- ./col -->
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-sm-3 mb-3 mb-sm-0">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="card text-bg-primary">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
             </div>
           </div>
 
         </div>
       </div>
+
+    </div>
+    </div>
     </div>
   </body>
   <!-- footer.php -->
   <footer>
     <!-- Tambahkan elemen-elemen footer -->
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-3.7.0.js"></script>
+    <script type="text/javascript" src="assets/js/all.js"></script>
+    <script type="text/javascript" src="assets/js/jqClock.min.js"></script>
+
+    <!-- jam -->
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#jam").clock({
+          "langSet": "id",
+          "timeFormat": ", %Pukul% H:i:s "
+        });
+      });
+    </script>
 
     <script>
       // event will be executed when the toggle-button is clicked
