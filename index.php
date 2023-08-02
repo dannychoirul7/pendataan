@@ -162,10 +162,16 @@ if (!isset($_SESSION["login"])) {
             Gambar
           </a>
         </li>
+
         <li>
-          <a class="text-white" href="catatan/index.php">
-            Catatan
+          <a class="text-white" href="#" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">Catatan
           </a>
+          <div class="collapse" id="account-collapse">
+            <ul class="btn-toggle-nav">
+              <li><a href="catatan/barang.php" class="text-white">Barang</a></li>
+              <li><a href="catatan/pengguna.php" class="text-white">Pengguna</a></li>
+            </ul>
+          </div>
         </li>
 
 

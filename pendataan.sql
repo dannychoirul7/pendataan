@@ -3,15 +3,15 @@
 
  Source Server         : local
  Source Server Type    : MySQL
- Source Server Version : 100421
+ Source Server Version : 100428 (10.4.28-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : pendataan
 
  Target Server Type    : MySQL
- Target Server Version : 100421
+ Target Server Version : 100428 (10.4.28-MariaDB)
  File Encoding         : 65001
 
- Date: 01/08/2023 21:17:10
+ Date: 02/08/2023 14:39:51
 */
 
 SET NAMES utf8mb4;
@@ -36,11 +36,11 @@ CREATE TABLE `barang`  (
   `join_pengguna` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `gambar_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_barang`) USING BTREE,
-  INDEX `nama`(`join_pengguna`) USING BTREE,
-  INDEX `jenis_barang`(`join_jenis_barang`) USING BTREE,
-  INDEX `merek_barang`(`join_merek_barang`) USING BTREE,
-  INDEX `opd`(`join_opd`) USING BTREE,
-  INDEX `gambar`(`gambar_barang`) USING BTREE,
+  INDEX `nama`(`join_pengguna` ASC) USING BTREE,
+  INDEX `jenis_barang`(`join_jenis_barang` ASC) USING BTREE,
+  INDEX `merek_barang`(`join_merek_barang` ASC) USING BTREE,
+  INDEX `opd`(`join_opd` ASC) USING BTREE,
+  INDEX `gambar`(`gambar_barang` ASC) USING BTREE,
   CONSTRAINT `jenis_barang` FOREIGN KEY (`join_jenis_barang`) REFERENCES `jenis_barang` (`id_jenis_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `merek_barang` FOREIGN KEY (`join_merek_barang`) REFERENCES `merek_barang` (`id_merek_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `opd` FOREIGN KEY (`join_opd`) REFERENCES `opd` (`id_opd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -72,11 +72,30 @@ CREATE TABLE `catatan_barang`  (
   `gambar_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `keterangan_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_catatan`) USING BTREE,
-  INDEX `tanggal_update`(`id_barang_catatan`) USING BTREE
+  INDEX `tanggal_update`(`id_barang_catatan` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of catatan_barang
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for catatan_pengguna
+-- ----------------------------
+DROP TABLE IF EXISTS `catatan_pengguna`;
+CREATE TABLE `catatan_pengguna`  (
+  `id_catatan` int NOT NULL AUTO_INCREMENT,
+  `id_pengguna_catatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `username_pengguna_catatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password_pengguna_catatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nama_pengguna_catatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `level_pengguna_catatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `keterangan_catatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id_catatan`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of catatan_pengguna
 -- ----------------------------
 
 -- ----------------------------
@@ -88,7 +107,7 @@ CREATE TABLE `gambar`  (
   `keterangan_gambar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `nama_gambar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_gambar`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gambar
@@ -102,7 +121,7 @@ CREATE TABLE `jenis_barang`  (
   `id_jenis_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `nama_jenis_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_jenis_barang`) USING BTREE,
-  INDEX `nama_jenis_barang`(`nama_jenis_barang`) USING BTREE
+  INDEX `nama_jenis_barang`(`nama_jenis_barang` ASC) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -117,7 +136,7 @@ CREATE TABLE `merek_barang`  (
   `id_merek_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `nama_merek_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_merek_barang`) USING BTREE,
-  INDEX `nama_merek_barang`(`nama_merek_barang`) USING BTREE
+  INDEX `nama_merek_barang`(`nama_merek_barang` ASC) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -133,9 +152,9 @@ CREATE TABLE `opd`  (
   `nama_opd` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `alamat_opd` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_opd`) USING BTREE,
-  INDEX `nama_opd`(`nama_opd`) USING BTREE,
-  INDEX `nama_opd_2`(`nama_opd`, `id_opd`, `alamat_opd`) USING BTREE,
-  INDEX `nama_opd_3`(`nama_opd`, `id_opd`) USING BTREE
+  INDEX `nama_opd`(`nama_opd` ASC) USING BTREE,
+  INDEX `nama_opd_2`(`nama_opd` ASC, `id_opd` ASC, `alamat_opd` ASC) USING BTREE,
+  INDEX `nama_opd_3`(`nama_opd` ASC, `id_opd` ASC) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -153,7 +172,7 @@ CREATE TABLE `pengguna`  (
   `nama_pengguna` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `level_pengguna` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_pengguna`) USING BTREE,
-  INDEX `nama_user`(`nama_pengguna`) USING BTREE
+  INDEX `nama_user`(`nama_pengguna` ASC) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -162,6 +181,7 @@ CREATE TABLE `pengguna`  (
 INSERT INTO `pengguna` VALUES ('1', 'DannyC', '$2y$10$q9e7ZYky4hd33.QbGXd7De3mr.RegnBVAhvtYCicN3K96yJO.nvl2', 'Danny Choirul', 'nol');
 INSERT INTO `pengguna` VALUES ('2', 'administrator', '$2y$10$nnD5XpR4eTWu98nHcOAOlefEFMYR0oh7DBF4ryo.SsVVOvibRD0va', 'admin', 'satu');
 INSERT INTO `pengguna` VALUES ('3', 'petugas', '$2y$10$dNMvL5ULuWSYhokj4G/J.uhFWGVCYQtbzNAratNe/B841R9gVh/qa', 'wong kantor', 'dua');
+INSERT INTO `pengguna` VALUES ('3d73677809ff941b9a067f18a71ccd9a', 'StaffLapangan', '$2y$10$FnOkvBOwoTRTuB/4tVuiRO2vB7kxIGwpIClsJK1xk18EnYIqofY4G', 'wong njobo', 'tiga');
 
 -- ----------------------------
 -- Triggers structure for table barang
@@ -182,7 +202,7 @@ tanggal_masuk_barang_catatan = new.tanggal_masuk_barang,
 tanggal_update_barang_catatan = new.tanggal_update_barang,
 join_pengguna_catatan = new.join_pengguna,
 gambar_barang_catatan = new.gambar_barang,
-keterangan_catatan = 'data di masuk'
+keterangan_catatan = 'data masuk'
 ;;
 delimiter ;
 
@@ -228,6 +248,54 @@ tanggal_masuk_barang_catatan = old.tanggal_masuk_barang,
 tanggal_update_barang_catatan = old.tanggal_update_barang,
 join_pengguna_catatan = old.join_pengguna,
 gambar_barang_catatan = old.gambar_barang,
+keterangan_catatan = 'data di hapus'
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table pengguna
+-- ----------------------------
+DROP TRIGGER IF EXISTS `catatan_masuk_pengguna`;
+delimiter ;;
+CREATE TRIGGER `catatan_masuk_pengguna` AFTER INSERT ON `pengguna` FOR EACH ROW INSERT INTO catatan_pengguna SET
+id_pengguna_catatan = new.id_pengguna,
+username_pengguna_catatan = new.username_pengguna,
+password_pengguna_catatan = new.password_pengguna,
+nama_pengguna_catatan = new.nama_pengguna,
+level_pengguna_catatan = new.level_pengguna,
+
+keterangan_catatan = 'data masuk'
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table pengguna
+-- ----------------------------
+DROP TRIGGER IF EXISTS `catatan_diubah_pengguna`;
+delimiter ;;
+CREATE TRIGGER `catatan_diubah_pengguna` AFTER UPDATE ON `pengguna` FOR EACH ROW INSERT INTO catatan_pengguna SET
+id_pengguna_catatan = new.id_pengguna,
+username_pengguna_catatan = new.username_pengguna,
+password_pengguna_catatan = new.password_pengguna,
+nama_pengguna_catatan = new.nama_pengguna,
+level_pengguna_catatan = new.level_pengguna,
+
+keterangan_catatan = 'data di ubah'
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table pengguna
+-- ----------------------------
+DROP TRIGGER IF EXISTS `catatan_dihapus_pengguna`;
+delimiter ;;
+CREATE TRIGGER `catatan_dihapus_pengguna` AFTER DELETE ON `pengguna` FOR EACH ROW INSERT INTO catatan_pengguna SET
+id_pengguna_catatan = old. id_pengguna,
+username_pengguna_catatan = old.username_pengguna,
+password_pengguna_catatan = old.password_pengguna,
+nama_pengguna_catatan = old.nama_pengguna,
+level_pengguna_catatan = old.level_pengguna,
+
 keterangan_catatan = 'data di hapus'
 ;;
 delimiter ;
