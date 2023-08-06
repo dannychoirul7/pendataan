@@ -3,15 +3,15 @@
 
  Source Server         : local
  Source Server Type    : MySQL
- Source Server Version : 100428 (10.4.28-MariaDB)
+ Source Server Version : 100421
  Source Host           : localhost:3306
  Source Schema         : pendataan
 
  Target Server Type    : MySQL
- Target Server Version : 100428 (10.4.28-MariaDB)
+ Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 02/08/2023 14:39:51
+ Date: 06/08/2023 20:56:04
 */
 
 SET NAMES utf8mb4;
@@ -36,11 +36,11 @@ CREATE TABLE `barang`  (
   `join_pengguna` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `gambar_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_barang`) USING BTREE,
-  INDEX `nama`(`join_pengguna` ASC) USING BTREE,
-  INDEX `jenis_barang`(`join_jenis_barang` ASC) USING BTREE,
-  INDEX `merek_barang`(`join_merek_barang` ASC) USING BTREE,
-  INDEX `opd`(`join_opd` ASC) USING BTREE,
-  INDEX `gambar`(`gambar_barang` ASC) USING BTREE,
+  INDEX `nama`(`join_pengguna`) USING BTREE,
+  INDEX `jenis_barang`(`join_jenis_barang`) USING BTREE,
+  INDEX `merek_barang`(`join_merek_barang`) USING BTREE,
+  INDEX `opd`(`join_opd`) USING BTREE,
+  INDEX `gambar`(`gambar_barang`) USING BTREE,
   CONSTRAINT `jenis_barang` FOREIGN KEY (`join_jenis_barang`) REFERENCES `jenis_barang` (`id_jenis_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `merek_barang` FOREIGN KEY (`join_merek_barang`) REFERENCES `merek_barang` (`id_merek_barang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `opd` FOREIGN KEY (`join_opd`) REFERENCES `opd` (`id_opd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -50,6 +50,7 @@ CREATE TABLE `barang`  (
 -- ----------------------------
 -- Records of barang
 -- ----------------------------
+INSERT INTO `barang` VALUES ('f2d360394ca790b62f0dc82afda64a84', '3cefa4e09e2da3492031813c1bbccf2e', '33e3435ab6ba42817be38c7ba3aada6b', 'qqq45', 'Normal', 'e9f1bed1aed86869c4ab441cbccf10f6', 'BARU', '12345', 'retwww', '2023-08-03 19:53:29', '2023-08-04 21:13:49', '1', '64cd079db7070.png');
 
 -- ----------------------------
 -- Table structure for catatan_barang
@@ -72,12 +73,16 @@ CREATE TABLE `catatan_barang`  (
   `gambar_barang_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `keterangan_catatan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_catatan`) USING BTREE,
-  INDEX `tanggal_update`(`id_barang_catatan` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+  INDEX `tanggal_update`(`id_barang_catatan`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of catatan_barang
 -- ----------------------------
+INSERT INTO `catatan_barang` VALUES (40, 'f2d360394ca790b62f0dc82afda64a84', '3cefa4e09e2da3492031813c1bbccf2e', '33e3435ab6ba42817be38c7ba3aada6b', 'qqq43', 'Normal', 'e9f1bed1aed86869c4ab441cbccf10f6', 'BARU', '12345', 'retwww', '2023-08-03 19:53:29', '2023-08-03 19:53:29', '1', '64cba349cc057.png', 'data masuk');
+INSERT INTO `catatan_barang` VALUES (41, 'f2d360394ca790b62f0dc82afda64a84', '3cefa4e09e2da3492031813c1bbccf2e', '33e3435ab6ba42817be38c7ba3aada6b', 'qqq437', 'Normal', 'e9f1bed1aed86869c4ab441cbccf10f6', 'BARU', '12345', 'retwww', '2023-08-03 19:53:29', '2023-08-04 21:03:29', '1', '64cba349cc057.png', 'data di ubah');
+INSERT INTO `catatan_barang` VALUES (42, 'f2d360394ca790b62f0dc82afda64a84', '3cefa4e09e2da3492031813c1bbccf2e', '33e3435ab6ba42817be38c7ba3aada6b', 'qqq45', 'Normal', 'e9f1bed1aed86869c4ab441cbccf10f6', 'BARU', '12345', 'retwww', '2023-08-03 19:53:29', '2023-08-04 21:03:39', '1', '64cba349cc057.png', 'data di ubah');
+INSERT INTO `catatan_barang` VALUES (43, 'f2d360394ca790b62f0dc82afda64a84', '3cefa4e09e2da3492031813c1bbccf2e', '33e3435ab6ba42817be38c7ba3aada6b', 'qqq45', 'Normal', 'e9f1bed1aed86869c4ab441cbccf10f6', 'BARU', '12345', 'retwww', '2023-08-03 19:53:29', '2023-08-04 21:13:49', '1', '64cd079db7070.png', 'data di ubah');
 
 -- ----------------------------
 -- Table structure for catatan_pengguna
@@ -92,7 +97,7 @@ CREATE TABLE `catatan_pengguna`  (
   `level_pengguna_catatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `keterangan_catatan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_catatan`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of catatan_pengguna
@@ -121,12 +126,13 @@ CREATE TABLE `jenis_barang`  (
   `id_jenis_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `nama_jenis_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_jenis_barang`) USING BTREE,
-  INDEX `nama_jenis_barang`(`nama_jenis_barang` ASC) USING BTREE
+  INDEX `nama_jenis_barang`(`nama_jenis_barang`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of jenis_barang
 -- ----------------------------
+INSERT INTO `jenis_barang` VALUES ('33e3435ab6ba42817be38c7ba3aada6b', 'satu');
 
 -- ----------------------------
 -- Table structure for merek_barang
@@ -136,12 +142,13 @@ CREATE TABLE `merek_barang`  (
   `id_merek_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `nama_merek_barang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_merek_barang`) USING BTREE,
-  INDEX `nama_merek_barang`(`nama_merek_barang` ASC) USING BTREE
+  INDEX `nama_merek_barang`(`nama_merek_barang`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of merek_barang
 -- ----------------------------
+INSERT INTO `merek_barang` VALUES ('3cefa4e09e2da3492031813c1bbccf2e', 'merek2');
 
 -- ----------------------------
 -- Table structure for opd
@@ -152,14 +159,15 @@ CREATE TABLE `opd`  (
   `nama_opd` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `alamat_opd` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_opd`) USING BTREE,
-  INDEX `nama_opd`(`nama_opd` ASC) USING BTREE,
-  INDEX `nama_opd_2`(`nama_opd` ASC, `id_opd` ASC, `alamat_opd` ASC) USING BTREE,
-  INDEX `nama_opd_3`(`nama_opd` ASC, `id_opd` ASC) USING BTREE
+  INDEX `nama_opd`(`nama_opd`) USING BTREE,
+  INDEX `nama_opd_2`(`nama_opd`, `id_opd`, `alamat_opd`) USING BTREE,
+  INDEX `nama_opd_3`(`nama_opd`, `id_opd`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of opd
 -- ----------------------------
+INSERT INTO `opd` VALUES ('e9f1bed1aed86869c4ab441cbccf10f6', 'smrg', 'hh');
 
 -- ----------------------------
 -- Table structure for pengguna
@@ -172,7 +180,7 @@ CREATE TABLE `pengguna`  (
   `nama_pengguna` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `level_pengguna` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_pengguna`) USING BTREE,
-  INDEX `nama_user`(`nama_pengguna` ASC) USING BTREE
+  INDEX `nama_user`(`nama_pengguna`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -203,6 +211,7 @@ tanggal_update_barang_catatan = new.tanggal_update_barang,
 join_pengguna_catatan = new.join_pengguna,
 gambar_barang_catatan = new.gambar_barang,
 keterangan_catatan = 'data masuk'
+;
 ;;
 delimiter ;
 
@@ -226,6 +235,7 @@ tanggal_update_barang_catatan = new.tanggal_update_barang,
 join_pengguna_catatan = new.join_pengguna,
 gambar_barang_catatan = new.gambar_barang,
 keterangan_catatan = 'data di ubah'
+;
 ;;
 delimiter ;
 
@@ -249,6 +259,7 @@ tanggal_update_barang_catatan = old.tanggal_update_barang,
 join_pengguna_catatan = old.join_pengguna,
 gambar_barang_catatan = old.gambar_barang,
 keterangan_catatan = 'data di hapus'
+;
 ;;
 delimiter ;
 
@@ -265,6 +276,7 @@ nama_pengguna_catatan = new.nama_pengguna,
 level_pengguna_catatan = new.level_pengguna,
 
 keterangan_catatan = 'data masuk'
+;
 ;;
 delimiter ;
 
@@ -281,6 +293,7 @@ nama_pengguna_catatan = new.nama_pengguna,
 level_pengguna_catatan = new.level_pengguna,
 
 keterangan_catatan = 'data di ubah'
+;
 ;;
 delimiter ;
 
@@ -297,6 +310,7 @@ nama_pengguna_catatan = old.nama_pengguna,
 level_pengguna_catatan = old.level_pengguna,
 
 keterangan_catatan = 'data di hapus'
+;
 ;;
 delimiter ;
 

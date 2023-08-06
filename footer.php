@@ -37,8 +37,13 @@
 
   <!-- datatables -->
   <script>
-    new DataTable('#datatable');
+    new DataTable('#datatable', {
+
+      scrollY: 200
+    });
   </script>
+
+
 
 </footer>
 
