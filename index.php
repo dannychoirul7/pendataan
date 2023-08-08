@@ -283,6 +283,7 @@ if (!isset($_SESSION["login"])) {
   <footer>
     <!-- Tambahkan elemen-elemen footer -->
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery-3.7.0.js"></script>
     <script type="text/javascript" src="assets/js/all.js"></script>
     <script type="text/javascript" src="assets/js/jqClock.min.js"></script>
