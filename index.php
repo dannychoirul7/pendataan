@@ -21,39 +21,87 @@ if (!isset($_SESSION["login"])) {
 
 <body>
   <header>
-    <div>
-      <nav class="navbar navbar-dark bg-primary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="index.php">Manajemen Aset</a>
 
-          <ul class="me-auto mb-sm-0 offset-3 text-white">
-            <div id="jam"></div>
-            <?php
-            $nama = $_SESSION["nama_pengguna"];
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <button class="navbar-toggler border-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar">
+          Toogle Button
+        </button>
 
-            $tanggal = mktime(date('m'), date("d"), date('Y'));
-            date_default_timezone_set("Asia/Jakarta");
-            ?>
-          </ul>
+        <ul class="me-auto mb-sm-0 offset-3 text-white">
+          <div id="jam"></div>
+          <?php
+          $nama = $_SESSION["nama_pengguna"];
 
+          $tanggal = mktime(date('m'), date("d"), date('Y'));
+          date_default_timezone_set("Asia/Jakarta");
+          ?>
+        </ul>
 
-          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+        <div class="dropdown">
+          <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-user fa-lg"></i>&nbsp; <strong><?= $_SESSION["nama_pengguna"] ?></strong>
           </button>
-
-          <div>
-            <div class="collapse collapse-vertical" id="collapseWidthExample">
-              <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profil">Profil</a>
-              <a href="logout.php" class="btn btn-primary">Logout</a>
-            </div>
-          </div>
-
-
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li> <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profil">Profil</a></li>
+            <li> <a href="logout.php" class="dropdown-item">Logout</a> </li>
+          </ul>
         </div>
-      </nav>
-    </div>
+
+        <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+          <div class="offcanvas-header">
+            <a class="btn btn-dark" type="button" href="index.php">
+              <h5> Manajemen Aset</h5>
+            </a>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="barang/index.php">
+                  Barang
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class=" nav-link" aria-current="page" href="merek/index.php">
+                  Merek
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="jenis/index.php">
+                  Jenis
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="opd/index.php">
+                  OPD(Organisasi Perangkat Daerah)
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="gambar/index.php">
+                  Gambar
+                </a>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catatan
+
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a href="catatan/barang.php" class="dropdown-item">Barang</a></li>
+                  <li><a href="catatan/pengguna.php" class="dropdown-item">Pengguna</a></li>
+                </ul>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
 
   </header>
+
   <!-- modal -->
   <div id="profil" class="modal" tabindex="-1">
     <div class="modal-dialog">
@@ -103,94 +151,11 @@ if (!isset($_SESSION["login"])) {
     </div>
   </div>
   <!-- end modal -->
-  <style>
-    li {
-      list-style: none;
-      margin: 20px 0 20px 0;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    .sidebar {
-      width: 250px;
-      height: 100vh;
-      position: fixed;
-      margin-left: -300px;
-      transition: 0.4s;
-    }
-
-    .active-main-content {
-      margin-left: 250px;
-    }
-
-    .active-sidebar {
-      margin-left: 0;
-    }
-
-    #main-content {
-      transition: 0.4s;
-    }
-  </style>
 
   <body>
-    <div>
-      <div class="sidebar p-4 bg-primary" id="sidebar">
-        <li>
-          <a class="text-white" href="barang/index.php">
-            Barang
-          </a>
-        </li>
-        <li>
-          <a class=" text-white" href="merek/index.php">
-            Merek
-          </a>
-        </li>
-        <li>
-          <a class="text-white" href="jenis/index.php">
-            Jenis
-          </a>
-        </li>
-        <li>
-          <a class="text-white" href="opd/index.php">
-            OPD(Organisasi Perangkat Daerah)
-          </a>
-        </li>
-        <li>
-          <a class="text-white" href="gambar/index.php">
-            Gambar
-          </a>
-        </li>
 
-        <li>
-          <a class="text-white" href="#" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">Catatan
-          </a>
-          <div class="collapse" id="account-collapse">
-            <ul class="btn-toggle-nav">
-              <li><a href="catatan/barang.php" class="text-white">Barang</a></li>
-              <li><a href="catatan/pengguna.php" class="text-white">Pengguna</a></li>
-            </ul>
-          </div>
-        </li>
-
-
-        <?php
-        if ($_SESSION['level_pengguna'] == 'nol' or $_SESSION['level_pengguna'] == 'satu') : ?>
-          <li>
-            <a class="text-white" href="pengguna/index.php">
-              Daftar Pengguna
-            </a>
-          </li>
-        <?php endif;
-        ?>
-
-      </div>
-    </div>
     <div class="p-4" id="main-content">
-      <button class="btn btn-primary" id="button-toggle">
-        Toggle Menu
-      </button>
+
       <div class="card mt-5">
         <div class="card-body">
 
@@ -282,7 +247,7 @@ if (!isset($_SESSION["login"])) {
   <!-- footer.php -->
   <footer>
     <!-- Tambahkan elemen-elemen footer -->
-    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/popper.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery-3.7.0.js"></script>
     <script type="text/javascript" src="assets/js/all.js"></script>

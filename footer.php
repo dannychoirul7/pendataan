@@ -1,7 +1,8 @@
 <!-- footer.php -->
 <footer>
   <!-- Tambahkan elemen-elemen footer -->
-  <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../assets/js/popper.min.js"></script>
+  <script type="text/javascript" src="../assets/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="../assets/js/jquery-3.7.0.js"></script>
   <script type="text/javascript" src="../assets/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="../assets/js/dataTables.bootstrap5.min.js"></script>
@@ -39,7 +40,6 @@
   <script>
     new DataTable('#datatable', {
 
-      scrollY: 200
     });
   </script>
 

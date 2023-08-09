@@ -14,13 +14,9 @@ $jenis_barang = query("SELECT * FROM jenis_barang ORDER BY id_jenis_barang Asc")
 ?>
 
 <body>
-  <?php
-  require '../side.php';
-  ?>
+
   <div class="p-4" id="main-content">
-    <button class="btn btn-primary" id="button-toggle">
-      Toggle Menu
-    </button>
+
     <div class="card mt-5">
       <div class="card-body">
         <h1 style="text-align:center">Jenis Barang </h1>

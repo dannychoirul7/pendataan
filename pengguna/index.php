@@ -22,13 +22,9 @@ $pengguna = query("SELECT * FROM pengguna ORDER BY id_pengguna Asc");
 ?>
 
 <body>
-  <?php
-  require '../side.php';
-  ?>
+
   <div class="p-4" id="main-content">
-    <button class="btn btn-primary" id="button-toggle">
-      Toggle Menu
-    </button>
+
     <div class="card mt-5">
       <div class="card-body">
         <h1 style="text-align:center">Daftar pengguna </h1>

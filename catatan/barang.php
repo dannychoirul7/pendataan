@@ -17,6 +17,7 @@ JOIN opd ON join_opd_catatan = id_opd
 JOIN pengguna ON join_pengguna_catatan = id_pengguna
 ORDER BY id_catatan DESC");
 ?>
+
 <style>
   div.dataTables_wrapper {
     width: 100%;
@@ -25,17 +26,13 @@ ORDER BY id_catatan DESC");
 </style>
 
 <body>
-  <?php
-  require '../side.php';
-  ?>
+
   <div class="p-4" id="main-content">
-    <button class="btn btn-primary" id="button-toggle">
-      Toggle Menu
-    </button>
+
     <div class="card mt-5">
       <div class="card-body">
         <h1 style="text-align:center">Data Catatan Barang</h1>
-        <table class="table table-striped" id="datatable">
+        <table class="table table-striped display nowrap" id="table">
           <thead>
             <tr style="text-align:center">
               <th width="15%" style="text-align:center">No</th>
@@ -79,4 +76,11 @@ ORDER BY id_catatan DESC");
     </div>
   </div>
 </body>
+
 <?php require '../footer.php'; ?>
+<script>
+  new DataTable('#table', {
+    scrollX: true,
+    scrollY: 430
+  });
+</script>

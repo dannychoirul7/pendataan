@@ -21,17 +21,13 @@ ORDER BY id_barang DESC");
 ?>
 
 <body>
-  <?php
-  require '../side.php';
-  ?>
+
   <div class="p-4" id="main-content">
-    <button class="btn btn-primary" id="button-toggle">
-      Toggle Menu
-    </button>
+
     <div class="card mt-5">
       <div class="card-body">
         <h1 style="text-align:center">Data Barang</h1>
-        <table class="table table-striped" id="datatable">
+        <table class="table table-striped" id="datatable" style="margin-left:auto;margin-right:auto">
           <thead>
             <tr style="text-align:center">
               <th width="15%" style="text-align:center">No</th>
@@ -47,6 +43,7 @@ ORDER BY id_barang DESC");
               </th>
             </tr>
           </thead>
+
           <tbody>
             <?php $no = 1; ?>
             <?php foreach ($barang as $row) : ?>
@@ -56,7 +53,7 @@ ORDER BY id_barang DESC");
                 <td style="text-align: center;"><?= $row["nama_jenis_barang"]; ?></td>
                 <td style="text-align: center;"><?= $row["nomor_serial_barang"]; ?></td>
                 <td style="text-align: center;"><?= $row["nama_opd"]; ?></td>
-                <td style="text-align: center;"><?= $row["alamat_opd"]; ?></td>
+                <td class="text-break" style="text-align: center;"><?= $row["alamat_opd"]; ?></td>
                 <td style="text-align: center;"><?= $row["status_barang"]; ?></td>
                 <td style="text-align: center;"><?= $row["nama_pengguna"]; ?></td>
                 <td style="text-align: center">
@@ -68,6 +65,7 @@ ORDER BY id_barang DESC");
             <?php $no++;
             endforeach; ?>
           </tbody>
+
         </table>
       </div>
     </div>

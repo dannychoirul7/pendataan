@@ -13,39 +13,83 @@
 
 <body>
   <header>
-    <div>
-      <nav class="navbar navbar-dark bg-primary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="../index.php">Manajemen Aset</a>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <button class="navbar-toggler border-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar">
+          Toogle Button
+        </button>
 
-          <ul class="me-auto mb-sm-0 offset-3 text-white">
-            <div id="jam"></div>
-            <?php
-            $nama = $_SESSION["nama_pengguna"];
+        <ul class="me-auto mb-sm-0 offset-3 text-white">
+          <div id="jam"></div>
+          <?php
+          $nama = $_SESSION["nama_pengguna"];
 
-            $tanggal = mktime(date('m'), date("d"), date('Y'));
-            date_default_timezone_set("Asia/Jakarta");
+          $tanggal = mktime(date('m'), date("d"), date('Y'));
+          date_default_timezone_set("Asia/Jakarta");
+          ?>
+        </ul>
 
-            ?>
-          </ul>
-
-
-          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-            <i class="fa-solid fa-user fa-lg"></i> &nbsp; <strong><?= $_SESSION["nama_pengguna"] ?></strong>
+        <div class="dropdown">
+          <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-user fa-lg"></i>&nbsp; <strong><?= $_SESSION["nama_pengguna"] ?></strong>
           </button>
-
-          <div>
-            <div class="collapse collapse-vertical" id="collapseWidthExample">
-              <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profil">Profil</a>
-              <a href="../logout.php" class="btn btn-primary">Logout</a>
-            </div>
-          </div>
-
-
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li> <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profil">Profil</a></li>
+            <li> <a href="../logout.php" class="dropdown-item">Logout</a> </li>
+          </ul>
         </div>
-      </nav>
-    </div>
 
+        <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+          <div class="offcanvas-header">
+            <a class="btn btn-dark" type="button" href="../index.php">
+              <h5> Manajemen Aset</h5>
+            </a>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../barang/index.php">
+                  Barang
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class=" nav-link" aria-current="page" href="../merek/index.php">
+                  Merek
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../jenis/index.php">
+                  Jenis
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../opd/index.php">
+                  OPD(Organisasi Perangkat Daerah)
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../gambar/index.php">
+                  Gambar
+                </a>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catatan
+
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a href="../catatan/barang.php" class="dropdown-item">Barang</a></li>
+                  <li><a href="../catatan/pengguna.php" class="dropdown-item">Pengguna</a></li>
+                </ul>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
   </header>
 
   <!-- modal -->
