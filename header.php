@@ -16,7 +16,7 @@
     <nav class="navbar navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
         <button class="navbar-toggler border-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar">
-          Toogle Button
+          <span class="navbar-toggler-icon"></span> Toogle Button
         </button>
 
         <ul class="me-auto mb-sm-0 offset-3 text-white">
@@ -29,8 +29,8 @@
           ?>
         </ul>
 
-        <div class="dropdown">
-          <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="btn-group">
+          <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
             <i class="fa-solid fa-user fa-lg"></i>&nbsp; <strong><?= $_SESSION["nama_pengguna"] ?></strong>
           </button>
           <ul class="dropdown-menu dropdown-menu-dark">
@@ -44,7 +44,6 @@
             <a class="btn btn-dark" type="button" href="../index.php">
               <h5> Manajemen Aset</h5>
             </a>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
