@@ -54,7 +54,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class=" nav-link" aria-current="page" href="../merek/index.php">
+                <a class="nav-link" aria-current="page" href="../merek/index.php">
                   Merek
                 </a>
               </li>

@@ -1,266 +1,70 @@
-<?php
-session_start();
-if (!isset($_SESSION["login"])) {
-    echo "<script>
-alert('Masukkan name dan Password');
-document.location.href ='login.php';
-</script>";
-    exit;
-}
-?>
-<!-- header.php -->
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Halaman Web</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-
+    <title>Nav-link dengan Warna Berubah</title>
+    <!-- Tambahkan link untuk Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .color-change-link.active {
+            background-color: #007bff;
+            /* Warna latar belakang biru cerah untuk tautan aktif */
+            color: white;
+            /* Warna teks putih untuk tautan aktif */
+        }
+    </style>
 </head>
 
 <body>
-    <header>
 
-        <nav class="navbar navbar-dark bg-dark fixed-top">
-            <div class="container-fluid">
-                <button class="navbar-toggler border-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar">
-                    Toogle Button
-                </button>
-
-                <ul class="me-auto mb-sm-0 offset-3 text-white">
-                    <div id="jam"></div>
-                    <?php
-                    $nama = $_SESSION["nama_pengguna"];
-
-                    $tanggal = mktime(date('m'), date("d"), date('Y'));
-                    date_default_timezone_set("Asia/Jakarta");
-                    ?>
-                </ul>
-
-                <div class="dropdown">
-                    <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-user fa-lg"></i>&nbsp; <strong><?= $_SESSION["nama_pengguna"] ?></strong>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li> <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profil">Profil</a></li>
-                        <li> <a href="logout.php" class="dropdown-item">Logout</a> </li>
-                    </ul>
-                </div>
-
-                <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-                    <div class="offcanvas-header">
-                        <a class="btn btn-dark" type="button" href="index.php">
-                            <h5> Manajemen Aset</h5>
-                        </a>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="barang/index.php">
-                                    Barang
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class=" nav-link" aria-current="page" href="merek/index.php">
-                                    Merek
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="jenis/index.php">
-                                    Jenis
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="opd/index.php">
-                                    OPD(Organisasi Perangkat Daerah)
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="gambar/index.php">
-                                    Gambar
-                                </a>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catatan
-
-
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a href="catatan/barang.php" class="dropdown-item">Barang</a></li>
-                                    <li><a href="catatan/pengguna.php" class="dropdown-item">Pengguna</a></li>
-                                </ul>
-                            </li>
-
-
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </nav>
-
-    </header>
-    <!-- modal -->
-    <div id="profil" class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Detail Pengguna</h5>
-                </div>
-                <div class="modal-body">
-
-                    <table class="table table-striped">
-
-                        <tr>
-                            <td>Username</td>
-                            <td>: <?= $_SESSION["username_pengguna"] ?> </td>
-                        </tr>
-
-                        <tr>
-                            <td>Nama</td>
-                            <td>: <?= $_SESSION["nama_pengguna"] ?> </td>
-                        </tr>
-
-                        <tr>
-                            <td>Level </td>
-                            <td>: <?php
-                                    if ($_SESSION["level_pengguna"] == "satu") {
-                                        echo "Administrator";
-                                    }
-                                    if ($_SESSION["level_pengguna"] == "dua") {
-                                        echo "Petugas";
-                                    }
-                                    if ($_SESSION["level_pengguna"] == "tiga") {
-                                        echo "Staff Lapangan";
-                                    }  ?>
-                            </td>
-                        </tr>
-                    </table>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-
-                </div>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link color-change-link" href="#">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color-change-link" href="#">Fitur</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color-change-link" href="#">Harga</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color-change-link" href="#">Kontak</a>
+                </li>
+            </ul>
         </div>
-    </div>
-    <!-- end modal -->
-    <style>
+    </nav>
 
-    </style>
+    <!-- Tambahkan link untuk Bootstrap JS dan jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <body>
-        <div class="p-4" id="main-content">
-            <div class="card mt-5">
-                <div class="card-body">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Dapatkan semua elemen dengan kelas 'color-change-link'
+            const colorChangeLinks = document.querySelectorAll(".color-change-link");
 
-                    <!-- Small boxes (Stat box) -->
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-info">
-                                    <div class="inner">
-                                        <h3>150</h3>
+            // Atur event listener untuk semua tautan
+            colorChangeLinks.forEach(function(link) {
+                link.addEventListener("click", function(event) {
+                    // Hapus kelas 'active' dari semua tautan
+                    colorChangeLinks.forEach(function(otherLink) {
+                        otherLink.classList.remove("active");
+                    });
 
-                                        <p>New Orders</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-bag"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-success">
-                                    <div class="inner">
-                                        <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                                        <p>Bounce Rate</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-stats-bars"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-warning">
-                                    <div class="inner">
-                                        <h3>44</h3>
-
-                                        <p>pengguna Registrations</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-person-add"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-danger">
-                                    <div class="inner">
-                                        <h3>65</h3>
-
-                                        <p>Unique Visitors</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-pie-graph"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </body>
-    <!-- footer.php -->
-    <footer>
-        <!-- Tambahkan elemen-elemen footer -->
-        <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="assets/js/bootstrap.bundle.min.js"></script>
-        <script type="text/javascript" src="assets/js/jquery-3.7.0.js"></script>
-        <script type="text/javascript" src="assets/js/all.js"></script>
-        <script type="text/javascript" src="assets/js/jqClock.min.js"></script>
-        <!-- kurang popper -->
-        <!-- jam -->
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $("#jam").clock({
-                    "langSet": "id",
-                    "timeFormat": ", %Pukul% H:i:s "
+                    // Tambahkan kelas 'active' pada tautan yang diklik
+                    link.classList.add("active");
                 });
             });
-        </script>
-
-        <script>
-            // event will be executed when the toggle-button is clicked
-            document.getElementById("button-toggle").addEventListener("click", () => {
-                // when the button-toggle is clicked, it will add/remove the active-sidebar class
-                document.getElementById("sidebar").classList.toggle("active-sidebar");
-                // when the button-toggle is clicked, it will add/remove the active-main-content class
-                document.getElementById("main-content").classList.toggle("active-main-content");
-            });
-        </script>
-
-    </footer>
+        });
+    </script>
 
 </body>
-
-</html>
 
 </html>
