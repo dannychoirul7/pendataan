@@ -40,7 +40,7 @@ ORDER BY id_catatan DESC");
                                 <td width="5%" style="text-align: center;" scope="row"><?= $no; ?></td>
                                 <td style="text-align: center;"><?= $row["id_pengguna_catatan"]; ?></td>
                                 <td style="text-align: center;"><?= $row["username_pengguna_catatan"]; ?></td>
-                                <td style="text-align: center;"><?= $row["password_pengguna_catatan"]; ?></td>
+                                <td style="text-align: center;">********</td>
                                 <td style="text-align: center;"><?= $row["nama_pengguna_catatan"]; ?></td>
                                 <td style="text-align: center;"> <?php
                                                                     if ($row["level_pengguna_catatan"] == "nol") {

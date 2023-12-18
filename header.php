@@ -13,6 +13,16 @@
 
 <body>
   <header>
+
+    <style>
+      .color-change-link.active {
+        background-color: #A9A9A9;
+        /* Warna latar belakang biru cerah untuk tautan aktif */
+        border-radius: 5px;
+        /* Tambahkan border berwarna biru cerah pada tautan aktif */
+      }
+    </style>
+
     <nav class="navbar navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
         <button class="navbar-toggler border-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar">
@@ -41,7 +51,7 @@
 
         <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
           <div class="offcanvas-header">
-            <a class="btn btn-dark" type="button" href="../index.php">
+            <a class="btn btn-dark color-change-link" type="button" href="../index.php">
               <h5> Manajemen Aset</h5>
             </a>
           </div>
@@ -49,40 +59,63 @@
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="../barang/index.php">
-                  Barang
+                <a class="nav-link color-change-link" aria-current="page" href="../barang/index.php">
+                  &ensp; Barang
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="../merek/index.php">
-                  Merek
+                <a class="nav-link color-change-link" aria-current="page" href="../merek/index.php">
+                  &ensp; Merek
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="../jenis/index.php">
-                  Jenis
+                <a class="nav-link color-change-link" aria-current="page" href="../jenis/index.php">
+                  &ensp; Jenis
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="../opd/index.php">
-                  OPD(Organisasi Perangkat Daerah)
+                <a class="nav-link color-change-link" aria-current="page" href="../opd/index.php">
+                  &ensp; OPD(Organisasi Perangkat Daerah)
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="../gambar/index.php">
-                  Gambar
+
+              <!-- <li class="nav-item">
+                <a class="nav-link color-change-link" aria-current="page" href="../gambar/index.php">
+                  &ensp; Gambar
                 </a>
-              </li>
+              </li> -->
 
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catatan
-
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  &ensp;Catatan
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a href="../catatan/barang.php" class="dropdown-item">Barang</a></li>
-                  <li><a href="../catatan/pengguna.php" class="dropdown-item">Pengguna</a></li>
+                  <li><a href="../catatan/barang.php" class="dropdown-item color-change-link">Barang</a></li>
+                  <li><a href="../catatan/pengguna.php" class="dropdown-item color-change-link">Pengguna</a></li>
                 </ul>
               </li>
+
+
+              <li class="nav-item">
+                <a class="nav-link color-change-link" aria-current="page" href="../sementara/index.php">
+                  &ensp; sementara
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link color-change-link" aria-current="page" href="../validasi/index.php">
+                  &ensp; Validasi
+                </a>
+              </li>
+
+              <?php if ($_SESSION['level_pengguna'] == 'nol' or $_SESSION['level_pengguna'] == 'satu') : ?>
+                <li class="nav-item">
+                  <a class="nav-link color-change-link" aria-current="page" href="../pengguna/index.php">
+                    &ensp; Data User
+                  </a>
+                </li>
+              <?php endif; ?>
+
 
             </ul>
           </div>

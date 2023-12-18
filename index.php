@@ -8,6 +8,13 @@ if (!isset($_SESSION["login"])) {
   exit;
 }
 
+$db = mysqli_connect("localhost", "root", "", "pendataan");
+
+$pilihopd = mysqli_query($db, "SELECT * FROM opd");
+$opd = mysqli_num_rows($pilihopd);
+
+$pilihbarang = mysqli_query($db, "SELECT * FROM barang");
+$barang = mysqli_num_rows($pilihbarang);
 ?>
 <!-- header.php -->
 <!DOCTYPE html>
@@ -77,11 +84,12 @@ if (!isset($_SESSION["login"])) {
                   OPD(Organisasi Perangkat Daerah)
                 </a>
               </li>
-              <li class="nav-item">
+
+              <!-- <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="gambar/index.php">
                   Gambar
                 </a>
-              </li>
+              </li> -->
 
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catatan
@@ -92,6 +100,26 @@ if (!isset($_SESSION["login"])) {
                   <li><a href="catatan/pengguna.php" class="dropdown-item">Pengguna</a></li>
                 </ul>
               </li>
+
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="sementara/index.php">
+                  Sementara
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="validasi/index.php">
+                  Validasi
+                </a>
+              </li>
+
+              <?php if ($_SESSION['level_pengguna'] == 'nol' or $_SESSION['level_pengguna'] == 'satu') : ?>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="pengguna/index.php">
+                    Data User
+                  </a>
+                </li>
+              <?php endif; ?>
 
             </ul>
           </div>
@@ -162,7 +190,7 @@ if (!isset($_SESSION["login"])) {
             <div class="col-sm-3 mb-3 mb-sm-0">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
+                  <h5 class="card-title">1</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                   <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
@@ -171,37 +199,37 @@ if (!isset($_SESSION["login"])) {
             <div class="col-sm-3">
               <div class="card text-bg-primary">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <h5 class="card-title">Jumlah Total OPD</h5>
+                  <h1 class="card-text" style="text-align: center;"><?= $opd ?></h1>
+                  <a href="opd/index.php" class="btn btn-primary">Info selengkapnya </a>
                 </div>
               </div>
             </div>
             <div class="col-sm-3">
-              <div class="card">
+              <div class="card text-bg-warning">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <h5 class="card-title">Jumlah Total Aset</h5>
+                  <h1 class="card-text" style="text-align: center;"><?= $barang ?></h1>
+                  <a href="barang/index.php" class="btn btn-warning">Info selengkapnya </a>
                 </div>
               </div>
             </div>
             <div class="col-sm-3">
-              <div class="card">
+              <div class="card text-bg-danger">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <h5 class="card-title">Jumlah Transaksi Hari Ini</h5>
+                  <h1 class="card-text" style="text-align: center;">0</h1>
+                  <a href="#" class="btn btn-danger">Info selengkapnya </a>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="row mt-2">
+          <!-- <div class="row mt-2">
             <div class="col-sm-3 mb-3 mb-sm-0">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
+                  <h5 class="card-title">5</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                   <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
@@ -210,7 +238,7 @@ if (!isset($_SESSION["login"])) {
             <div class="col-sm-3">
               <div class="card text-bg-primary">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
+                  <h5 class="card-title">6</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                   <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
@@ -219,7 +247,7 @@ if (!isset($_SESSION["login"])) {
             <div class="col-sm-3">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
+                  <h5 class="card-title">7</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                   <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
@@ -228,13 +256,13 @@ if (!isset($_SESSION["login"])) {
             <div class="col-sm-3">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
+                  <h5 class="card-title">8</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                   <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div>
       </div>
